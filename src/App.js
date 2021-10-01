@@ -2,7 +2,7 @@ import './App.css';
 import SideMenu from './components/SideMenu';
 
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 import Users from './screens/Users';
 import News from './screens/News';
@@ -17,12 +17,13 @@ import ConfirmInvoice from './screens/ConfirmInvoice';
 import DeliverInvoice from './screens/DeliverInvoice';
 import CancelInvoice from './screens/CancelInvoice';
 
-function App() {
+const App = () => {
 
   const [inactive, setInactive] = useState(false);
 
   return (
     <div className="App">
+        
         <Router>
             <SideMenu onCollapse={ (inactive) => {
                 setInactive(inactive);
