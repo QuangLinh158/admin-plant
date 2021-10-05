@@ -1,4 +1,4 @@
-/* *{
+*{
     margin: 0;
     padding: 0;
 }
@@ -136,9 +136,8 @@ body{
 }
 
 .side-menu-footer{
-    width: 100%;
+    width: 300px;
     height: 11%;
-    background: #33691e;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -166,28 +165,43 @@ body{
     transition: opacity .2s ease-in;
 }
 
-.side-menu.inactive .side-menu-footer .user-info{
+/* .side-menu.inactive .side-menu-footer .user-info{
+    opacity: 1;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+} */
+
+/* ============================= */
+
+.side-menu-footer.inactive .user-info{
     opacity: 1;
     width: 0;
     height: 0;
     overflow: hidden;
 }
 
+
+/* ============================= */
+
 .side-menu-footer .user-info h5{
     font-size: 15px;
+    font-weight: bold;
 }
 
 .side-menu-footer .user-info p{
     font-size: 12px;
     margin-top: -2px;
+    font-weight: bold;
 }
 
 .side-menu-footer .user-info .row{
     margin: 0px 0px;
+    
 }
 .side-menu-footer .user-info .row i{
-    margin-left: 70px;
-    margin-top: -6px;
+    margin-left: 60px;
+    margin-top: -8px;
     font-size: 20px;
 }
 
@@ -207,5 +221,5 @@ body{
 
 .container.inactive {
     margin-left: 80px;
-} */
+}
 /* {============================= layout của sideMenu ==============================} */

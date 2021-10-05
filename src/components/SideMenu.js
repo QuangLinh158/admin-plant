@@ -3,6 +3,9 @@ import logo from '../assets/logoPlants.jpg'
 import IMG_3505 from '../assets/IMG_3505.jpeg'
 import MenuItem from './MenuItem';
 
+import { getAuth, signOut } from '@firebase/auth';
+
+
 //=================== file dùng để tạo sidebarMenu =======================
 
 const menuItems = [
@@ -27,7 +30,7 @@ const menuItems = [
 ];
 
 
- const SideMenu = (props) => {
+ const SideMenu = (props, {history}) => {
      //trạng thái sidebarMenu
     const [inactive, setInactive] = useState(false);
 
@@ -40,6 +43,28 @@ const menuItems = [
         }
         props.onCollapse(inactive);
     }, [inactive]);
+
+    //Logout
+    // const logout = () => {
+    //     signOut(auth)
+    //         .then(() => {
+    //             localStorage.removeItem('token')
+    //             history.push('/')
+    //         })
+    //         .catch((e) => alert(e.message))
+    // }
+
+    // useEffect(() => {
+    //     const token = localStorage.getItem('token');
+
+    //     if (!token) {
+    //         history.push('/')
+    //     }
+    // },[])
+
+    // const auth = getAuth();
+    // const user = auth.currentUser;
+
 
     return (
         <div className={ `side-menu ${inactive ? "inactive" : ""}`}>
@@ -84,15 +109,22 @@ const menuItems = [
             </div>
             
             {/* {chỗ này là chỉnh user} */}
-            <div className="side-menu-footer">
+            {/* <div className="side-menu-footer">
                 <div className="avatar">
                     <img src={IMG_3505} alt="user"/>
                 </div>
                 <div className="user-info">
-                    <h5>Quang Linh</h5>
-                    <p>truli15839@gmail.com</p>
+                    <h5>{user && user.displayName}</h5>
+                    <div className="row">
+                        <p>{ user && user.email}</p>
+                        <i 
+                            onClick={logout}
+                            className="bi bi-box-arrow-right"
+                        ></i>
+                    </div>
+                    
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )

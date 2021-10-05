@@ -46,6 +46,7 @@ body {
 	background-color: #fff;
 	padding: 15px;
 	padding-top: 30px;
+	
 }
 
 .login h1 {
@@ -55,10 +56,10 @@ body {
 	letter-spacing: 3px;
 }
 
-.login form {
+/* .login form {
 	max-width: 420px;
 	margin: 30px auto;
-}
+} */
 
 .login .btn {
 	border-radius: 50px;
@@ -68,6 +69,8 @@ body {
 	font-size: 20px;
 	padding: 14px;
 	background-color: #00B72E;
+	max-width: 420px;
+	margin: 5px auto;
 }
 
 .form-group input {
@@ -79,6 +82,8 @@ body {
 	padding: 26px 30px;
 	border-radius: 50px;
 	transition : 0.2s;
+	max-width: 420px;
+	margin: 20px auto;
 }
 
 
@@ -89,6 +94,8 @@ body {
 .form-check {
 	padding: 0;
 	text-align: left;
+	max-width: 420px;
+	margin: 1px auto;
 }
 
 .form-check label {
@@ -168,6 +175,8 @@ input:checked + .slider:before {
   -ms-transform: translateX(30px);
   transform: translateX(30px);
 }
+
+
 
 
 
