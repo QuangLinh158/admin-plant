@@ -4,14 +4,14 @@ import { NavLink } from 'react-router-dom';
 //================menu item=================
 const MenuItem = (props) => {
 
-    const { name, subMenus, iconClassName, onClick, to, exact } = props; 
+    const { name, subMenus, iconClassName, to } = props; 
     const [expand, setExpand] = useState(false);
 
     return (
         // xự kiện click item 
     <li onClick={props.onClick}>
         <NavLink exact to={to} className="menu-item" 
-        onClick= {() => setExpand(!expand)}> 
+            onClick= {() => setExpand(!expand)}> 
             <div className="menu-icon">
                 <i className={iconClassName}></i>
             </div>

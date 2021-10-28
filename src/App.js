@@ -1,11 +1,11 @@
 import './App.css';
 import Dashboard from './components/Dashboard';
-import {BrowserRouter, Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 import React, { useState,useEffect } from 'react';
-import { initializeApp } from "firebase/app";
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 
+import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
 
 const firebaseConfig = {
@@ -19,9 +19,10 @@ const firebaseConfig = {
   
 initializeApp(firebaseConfig);
 
+
 const App = () => {
 
-  const [inactive, setInactive] = useState(false);
+  
   const [user, setUser] = useState(null);
 
   useEffect(() => {

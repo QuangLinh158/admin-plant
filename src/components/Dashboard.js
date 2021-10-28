@@ -1,6 +1,6 @@
 import SideMenu from './SideMenu';
 
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import React, { useState,useEffect } from 'react';
 import { getAuth, signOut } from '@firebase/auth';
 import IMG_3505 from '../assets/IMG_3505.jpeg'
@@ -18,6 +18,9 @@ import UnconfirmInvoice from '../screens/UnconfirmInvoice';
 import ConfirmInvoice from '../screens/ConfirmInvoice';
 import DeliverInvoice from '../screens/DeliverInvoice';
 import CancelInvoice from '../screens/CancelInvoice';
+
+import AddDiscount from '../screens/AddDiscount';
+import EditDiscount from '../screens/EditDiscount';
 
 const Dashboard = ({history}) => {
 
@@ -66,9 +69,9 @@ const user = auth.currentUser;
               <Router exact path={'/sanpham'}>
                   <Products />
               </Router>
-              <Router exact path={'/khuyenmai'}>
+              {/* <Router exact path={'/khuyenmai'}>
                   <Discount />
-              </Router>
+              </Router> */}
               <Router exact path={'/hoadon'}>
                   <Invoices />
               </Router>
@@ -91,7 +94,14 @@ const user = auth.currentUser;
                   <CancelInvoice />
               </Router>
 
+
             </Switch>
+
+                <Route path="/themkm" component={AddDiscount} />
+                <Route path="/khuyenmai" component={Discount} />
+                <Route path="/suakm/:id" component={EditDiscount} />
+
+
             </div>
             
             <div className={`side-menu-footer ${inactive ? "inactive" : ""}`}>

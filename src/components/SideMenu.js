@@ -1,9 +1,9 @@
 import React, {useState,useEffect} from 'react'
 import logo from '../assets/logoPlants.jpg'
-import IMG_3505 from '../assets/IMG_3505.jpeg'
+//import IMG_3505 from '../assets/IMG_3505.jpeg'
 import MenuItem from './MenuItem';
 
-import { getAuth, signOut } from '@firebase/auth';
+//import { getAuth, signOut } from '@firebase/auth';
 
 
 //=================== file dùng để tạo sidebarMenu =======================
