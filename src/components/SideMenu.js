@@ -14,7 +14,7 @@ const menuItems = [
     {name: 'Loại Sản Phẩm', to:'/loaisanpham', iconClassName:'bi bi-collection-fill'},
     {name: 'Sản Phẩm', to:'/sanpham', iconClassName:'bi bi-bag-fill'},
     {name: 'Khuyến Mãi', to:'/khuyenmai', iconClassName:'bi bi-tags-fill'},
-    {name: 'Hóa Đơn', to:'/hoadon', iconClassName:'bi bi-cash-stack'},
+    // {name: 'Hóa Đơn', to:'/hoadon', iconClassName:'bi bi-cash-stack'},
     {name: 'Thống Kê', to:'/thongke', iconClassName:'bi bi-reception-4'},
     
     {
@@ -22,8 +22,9 @@ const menuItems = [
         exact: true, 
         to:'/trangthaidon',
         iconClassName:'bi bi-check-square-fill',
-        subMenus:[{name:"Đã xác nhận", to: '/trangthaidon/dxn'},
-        {name:'Chưa xác nhận', to: '/trangthaidon/cxn'},
+        subMenus:[{name:'Chưa xác nhận', to: '/trangthaidon/cxn'},
+        {name:"Đã xác nhận", to: '/trangthaidon/dxn'},
+        {name:'Đang giao', to: '/trangthaidon/dg'},
         {name:'Đơn đã giao', to: '/trangthaidon/ddg'},
         {name:'Đơn đã hủy', to: '/trangthaidon/ddh'}]
     }

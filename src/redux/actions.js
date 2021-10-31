@@ -23,6 +23,10 @@ const getDiscount = (discount) => ({
     payload: discount,
 });
 
+export const reset = () => ({
+    type: types.RESET,
+});
+
 export const getDiscountInitiate = () => {
     return function (dispatch) {
         db.collection("discounts").onSnapshot((querySnapshot) => {

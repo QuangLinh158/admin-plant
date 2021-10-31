@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function DeliverInvoice() {
+export default function Delivering() {
     return (
         <div className="backgroundUser" style={{background:'white', padding:20, marginTop:-38}}>
             <div className="row mb-2" >
@@ -22,7 +22,7 @@ export default function DeliverInvoice() {
                         <th scope="col">Khách Hàng</th>
                         <th scope="col">Ngày Thanh Toán</th>
                         <th scope="col">Tình Trạng</th>
-                        {/* <th></th> */}
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -33,13 +33,13 @@ export default function DeliverInvoice() {
                     <td>HD00123</td>
                     <td>Nguyễn Văn Quang Linh</td>
                     <td>31/10/2021</td>
-                    <td>Thành Công</td>
-                    {/* <td>
+                    <td>Đang giao</td>
+                    <td>
                         <i className="bi bi-bag-check-fill"
                           style={{color:'green'}}></i>
-                    </td> */}
+                    </td>
                     <td>
-                        <i className="bi bi-trash-fill"
+                        <i className="bi bi-bag-x-fill"
                            style={{color:'red'}} ></i>
                     </td>
                     <td>

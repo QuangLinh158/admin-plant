@@ -11,11 +11,12 @@ import News from '../screens/News';
 import CategoriesProduct from '../screens/CategoriesProduct';
 import Products from '../screens/Products';
 import Discount from '../screens/Discount';
-import Invoices from '../screens/Invoices';
+//import Invoices from '../screens/Invoices';
 import Statistic from '../screens/Statistic';
 import InvoiceState from '../screens/InvoiceState';
 import UnconfirmInvoice from '../screens/UnconfirmInvoice';
 import ConfirmInvoice from '../screens/ConfirmInvoice';
+import Delivering from '../screens/delivering';
 import DeliverInvoice from '../screens/DeliverInvoice';
 import CancelInvoice from '../screens/CancelInvoice';
 
@@ -69,12 +70,9 @@ const user = auth.currentUser;
               <Router exact path={'/sanpham'}>
                   <Products />
               </Router>
-              {/* <Router exact path={'/khuyenmai'}>
-                  <Discount />
-              </Router> */}
-              <Router exact path={'/hoadon'}>
+              {/* <Router exact path={'/hoadon'}>
                   <Invoices />
-              </Router>
+              </Router> */}
               <Router exact path={'/thongke'}>
                   <Statistic />
               </Router>
@@ -86,6 +84,9 @@ const user = auth.currentUser;
               </Router>
               <Router exact path={'/trangthaidon/cxn'}>
                   <UnconfirmInvoice />
+              </Router>
+              <Router exact path={'/trangthaidon/dg'}>
+                  <Delivering/>
               </Router>
               <Router exact path={'/trangthaidon/ddg'}>
                   <DeliverInvoice />

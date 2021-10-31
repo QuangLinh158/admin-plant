@@ -3,3 +3,4 @@ export const DELETE_DISCOUNT = "DELETE_DISCOUNT";
 export const UPDATE_DISCOUNT = "UPDATE_DISCOUNT";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const GET_DISCOUNT = "GET_DISCOUNT";
+export const RESET = "RESET";

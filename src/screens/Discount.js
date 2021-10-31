@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDiscountInitiate, deleteDiscountInitiate, getDiscountInitiatee } from '../redux/actions';
+import { getDiscountInitiate, deleteDiscountInitiate, getDiscountInitiatee, reset } from '../redux/actions';
 import moment from 'moment';
 import { MDBBtn,
     MDBModal,
@@ -67,19 +67,20 @@ const Discount = () => {
             <div className="col-sm-5" style={{fontWeight:'bold'}}>Tình Trạng:</div>
             <div className="col-sm-7">{discount.TinhTrangKhuyenMai}</div>
 
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Ngày Bắt Đầu:</div>
+            {/* <div className="col-sm-5" style={{fontWeight:'bold'}}>Ngày Bắt Đầu:</div>
             <div className="col-sm-7">{moment(discount.NgayKhuyenMai[0].seconds * 1000).format('MM-DD-YYYY').toString()}</div>
 
             <div className="col-sm-5" style={{fontWeight:'bold'}}>Ngày Kết Thúc:</div>
-            <div className="col-sm-7">{moment(discount.NgayKhuyenMai[1].seconds * 1000).format('MM-DD-YYYY').toString()}</div>
+            <div className="col-sm-7">{moment(discount.NgayKhuyenMai[1].seconds * 1000).format('MM-DD-YYYY').toString()}</div> */}
         </div>
     );
     const handleModal = (id) => {
-        setModalOpen(!modalOpen);
+        setModalOpen(true);
         dispatch(getDiscountInitiatee(id));
     };
     const handleCloseModal = () => {
         setModalOpen(false);
+        dispatch(reset());
     };
 
     return (
@@ -142,8 +143,11 @@ const Discount = () => {
                         ></i>
                     </td>
                     </tr>
-                
-                    {modalOpen && (
+                    </tbody>
+                ))}
+            </table>
+            </div>
+            {modalOpen && (
                         <MDBModal 
                         show={modalOpen} 
                         tabIndex='-1'>
@@ -154,7 +158,7 @@ const Discount = () => {
                                     <MDBBtn 
                                     color='yellow' 
                                     onClick={handleCloseModal}
-                                    ><i class="bi bi-x-square-fill"></i></MDBBtn>
+                                    ><i className="bi bi-x-square-fill"></i></MDBBtn>
                                 </MDBModalHeader>
                                 <MDBModalBody>{modalBody}</MDBModalBody>
                                 <MDBModalFooter>
@@ -168,11 +172,6 @@ const Discount = () => {
                             </MDBModalDialog>
                         </MDBModal>
                     )}
-                    </tbody>
-                ))}
-            </table>
-            </div>
-
         </div>
     )
 }

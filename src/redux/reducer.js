@@ -17,6 +17,11 @@ const discountReducer = (state = initialState,action) => {
                 ...state,
                 discount: action.payload,
             };
+        case types.RESET:
+            return{
+                ...state,
+                discount: {},
+            };
         default:
             return state;
     }
