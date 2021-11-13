@@ -19,7 +19,7 @@ const AddDiscount = () => {
 
     const startValue:Date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
     const endValue:Date = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 20 );
-    const minDate:Date = new Date(new Date().getFullYear(), new Date().getMonth(), 17);
+    const minDate:Date = new Date(new Date().getFullYear(), new Date().getMonth(), 4);
     const maxDate:Date = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 20);
 
     const [state, setState] = useState(initialState);
@@ -138,7 +138,7 @@ const AddDiscount = () => {
                         min={minDate}
                         max={maxDate}
                         minDays={1}
-                        maxDays={15}
+                        maxDays={30}
                         value={NgayKhuyenMai}
                         name="NgayKhuyenMai"
                         onChange={handleInputChange}
