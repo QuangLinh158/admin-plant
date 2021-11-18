@@ -3,8 +3,7 @@ import React, {useState} from 'react';
 import { DateRangePickerComponent} from '@syncfusion/ej2-react-calendars';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { addDiscountInitiate} from '../redux/actions';
-
+import { addDiscountInitiate} from '../redux/discount-reducer/actions';
 
 const initialState = {
     MaKhuyenMai:"",

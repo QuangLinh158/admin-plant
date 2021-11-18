@@ -1,5 +1,5 @@
 import * as types from "./actionTypes";
-import db from "../firebase";
+import db from "../../firebase";
 
 const getDiscounts = (discounts) => ({
     type: types.GET_DISCOUNTS,
@@ -29,7 +29,7 @@ export const reset = () => ({
 
 export const getDiscountInitiate = () => {
     return function (dispatch) {
-        db.collection("discounts").onSnapshot((querySnapshot) => {
+        db.firestore().collection("discounts").onSnapshot((querySnapshot) => {
             const discounts= [] ;
             querySnapshot.forEach((doc) => {
                 discounts.push({...doc.data(), id: doc.id})
@@ -41,28 +41,28 @@ export const getDiscountInitiate = () => {
 
 export const addDiscountInitiate = (discount) =>{
     return function(dispatch) {
-        db.collection("discounts").doc().set(discount);
+        db.firestore().collection("discounts").doc().set(discount);
         dispatch(addDiscount());
     }
 };
 
 export const deleteDiscountInitiate = (id) =>{
     return function(dispatch) {
-        db.collection("discounts").doc(id).delete();
+        db.firestore().collection("discounts").doc(id).delete();
         dispatch(deleteDiscount());
     }
 };
 
 export const updateDiscountInitiate = (id, discount) =>{
     return function(dispatch) {
-        db.collection("discounts").doc(id).update(discount);
+        db.firestore().collection("discounts").doc(id).update(discount);
         dispatch(updateDiscount());
     }
 };
 
 export const getDiscountInitiatee = (id, discount) =>{
     return function(dispatch) {
-        db.collection("discounts").doc(id).get().then((discount) => {
+        db.firestore().collection("discounts").doc(id).get().then((discount) => {
             dispatch(getDiscount({...discount.data()}))
         }).catch((error) => console.log(error));
     }

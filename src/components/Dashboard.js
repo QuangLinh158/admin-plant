@@ -8,8 +8,8 @@ import IMG_3505 from '../assets/IMG_3505.jpeg'
 
 import Users from '../screens/Users';
 import News from '../screens/News';
-import CategoriesProduct from '../screens/CategoriesProduct';
-import Products from '../screens/Products';
+import CategoriesProduct from '../screens/products-creens/CategoriesProduct';
+import Products from '../screens/products-creens/Products';
 import Discount from '../screens/Discount';
 //import Invoices from '../screens/Invoices';
 import Statistic from '../screens/Statistic';
