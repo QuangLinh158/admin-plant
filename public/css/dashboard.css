@@ -246,7 +246,12 @@ body{
     box-shadow: rgb(196, 194, 194) 2px 2px;
     border-radius: 10px;
 }
-
+.backgroundProduct
+{
+    width:110%;
+    box-shadow: rgb(196, 194, 194) 2px 2px;
+    border-radius: 10px;
+}
 /* {============================= layout của sideMenu ==============================} */
 
 .paginationBttns {

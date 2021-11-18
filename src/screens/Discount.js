@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDiscountInitiate, deleteDiscountInitiate, getDiscountInitiatee, reset } from '../redux/actions';
+import { getDiscountInitiate, deleteDiscountInitiate, getDiscountInitiatee, reset } from '../redux/discount-reducer/actions';
 import moment from 'moment';
 import { MDBBtn,
     MDBModal,
@@ -30,7 +30,7 @@ const Discount = () => {
     const [state, setState] = useState(initialState);
     const dispatch = useDispatch();
     const {MaKhuyenMai, TenKhuyenMai, KhuyenMaiToiDa, ChietKhau, TinhTrangKhuyenMai, NgayKhuyenMai} = state;
-    const {discounts, discount} = useSelector(state =>state.data);
+    const {discounts, discount} = useSelector(state =>state.discounts);
     const [modalOpen, setModalOpen] = useState(false);
     const [pageNumber, setPageNumber] = useState(0);
 
