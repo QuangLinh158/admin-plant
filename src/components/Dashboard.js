@@ -9,7 +9,7 @@ import IMG_3505 from '../assets/IMG_3505.jpeg'
 import Users from '../screens/Users';
 import News from '../screens/News';
 import CategoriesProduct from '../screens/CategoriesProduct';
-import Products from '../screens/Products';
+//import Products from '../screens/Products';
 import Discount from '../screens/Discount';
 //import Invoices from '../screens/Invoices';
 import Statistic from '../screens/Statistic';
@@ -22,6 +22,13 @@ import CancelInvoice from '../screens/CancelInvoice';
 
 import AddDiscount from '../screens/AddDiscount';
 import EditDiscount from '../screens/EditDiscount';
+import CateScreen from "../screens/products-creens/CategoriesProduct";
+import AddCateScreen from "../screens/products-creens/category-screens/AddCateScreen";
+import UpdateCateScreen from "../screens/products-creens/category-screens/UpdateCateScreen";
+import ProductScreen from "../screens/products-creens/Products";
+import AddProductScreen from "../screens/products-creens/product-screens/AddProductScreen";
+import UpdateProductScreen from "../screens/products-creens/product-screens/UpdateProductScreen";
+import Login from "../screens/Login";
 
 const Dashboard = ({history}) => {
 
@@ -64,12 +71,12 @@ const user = auth.currentUser;
               <Router exact path={'/tintuc'}>
                   <News />
               </Router>
-              <Router exact path={'/loaisanpham'}>
-                  <CategoriesProduct />
-              </Router>
-              <Router exact path={'/sanpham'}>
-                  <Products />
-              </Router>
+              {/*<Router exact path={'/loaisanpham'}>*/}
+              {/*    <CategoriesProduct />*/}
+              {/*</Router>*/}
+              {/*<Router exact path={'/sanpham'}>*/}
+              {/*    <Products />*/}
+              {/*</Router>*/}
               {/* <Router exact path={'/hoadon'}>
                   <Invoices />
               </Router> */}
@@ -101,6 +108,16 @@ const user = auth.currentUser;
                 <Route path="/themkm" component={AddDiscount} />
                 <Route path="/khuyenmai" component={Discount} />
                 <Route path="/suakm/:id" component={EditDiscount} />
+
+                <Route path="/loaisanpham" component={CateScreen} />
+                <Route path="/themloai" component={AddCateScreen} />
+                <Route path="/sualoai/:id" component={UpdateCateScreen} />
+
+                <Route path="/sanpham" component={ProductScreen} />
+                <Route path="/themsp" component={AddProductScreen} />
+                <Route path="/suasp/:id" component={UpdateProductScreen} />
+
+
 
 
             </div>

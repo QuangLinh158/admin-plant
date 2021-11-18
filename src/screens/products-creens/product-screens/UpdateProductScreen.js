@@ -99,7 +99,10 @@ const UpdateProductScreen = (props) => {
                 })
             dispatch(updateProductInitiate(id,state));
             setState({MaSp:"", TenSp:"", TenLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
+
+            window.alert("Bạn cập nhật thành công!");
             history.push('/sanpham');
+
         }
     };
     return (

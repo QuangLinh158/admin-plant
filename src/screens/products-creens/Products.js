@@ -36,15 +36,66 @@ const ProductScreen = () => {
     const [modalOpen, setModalOpen] = useState(false);
     //phan trang
     const [pageNumber, setPageNumber] = useState(0);
-    const [searchDis, setSearchDis] = useState('');
+    const [searchPro, setSearchPro] = useState('');
     const searchText = (event) => {
-        setSearchDis(event.target.value);
+        setSearchPro(event.target.value);
     }
     let dataSearch = product_list.filter(item => {
         return Object.keys(item).some(key =>
-            item[key].toString().toLowerCase().includes(searchDis.toString().toLowerCase())
+            item[key].toString().toLowerCase().includes(searchPro.toString().toLowerCase())
         );
     });
+    //phan trang
+    const product_PerPage = 6;
+    const pagesVisited = pageNumber * product_PerPage;
+    const displayPro = dataSearch.slice(pagesVisited, pagesVisited + product_PerPage)
+        .map((item,index) => {
+            return(
+                <tbody key={index} >
+                <tr >
+                    <th scope="row">{index+1}</th>
+                    <td>{item.MaSp}</td>
+                    <td>{item.TenSp}</td>
+                    <td>{item.TenLoai}</td>
+                    <td>{item.GiaSp}</td>
+                    <td>
+                        <img src={item.ImageURL} width={50} height={50}/>
+                    </td>
+                    <td>{item.MoTaChiTiet}</td>
+                    <td>{item.SoluongSp}</td>
+                    <td>{item.TinhTrang}</td>
+                    <td>
+                        <Link to={`/suasp/${item.id}`}>
+                            <i className="bi bi-pencil-square"
+                               style={{color:'green'}}
+                               onClick= {() => updateProduct(item.id)}
+                            ></i>
+                        </Link>
+                    </td>
+                    <td>
+                        <i className="bi bi-trash-fill"
+                           style={{color:'red'}}
+                           onClick= {() => deleteProduct(item.id)}
+                        ></i>
+                    </td>
+                    <td>
+                        <i className="bi bi-eye-fill"
+                           style={{color:'blue'}}
+                           onClick= {() => handleModal(item.id)}
+                        ></i>
+                    </td>
+                </tr>
+                </tbody>
+            );
+        });
+
+    const pageCount = Math.ceil(product_list.length /product_PerPage);
+    const changePage = ({selected}) =>{
+        setPageNumber(selected);
+    }
+    //===========================
+
+
 
     useEffect(() => {
         dispatch(getProductInitiate());
@@ -103,7 +154,12 @@ const ProductScreen = () => {
                     <button type="button" className="btn btn-success" style={{marginLeft:15, height:37,background:'green'}}><i className="bi bi-plus-circle"></i></button>
                 </Link>
                 <div className="input-group" style={{width:300, height:30, marginLeft:15}}>
-                    <input type="text" className="form-control" placeholder="Tìm Kiếm ..."/>
+                    <input type="text"
+                           className="form-control"
+                           placeholder="Tìm Kiếm ..."
+                           value = {searchPro}
+                           onChange = {searchText.bind(this)}
+                    />
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary" type="button" id="button-addon2" style={{background:'green',color:'white'}}><i className="bi bi-search"></i></button>
                     </div>
@@ -126,80 +182,56 @@ const ProductScreen = () => {
                         <th scope="col">Mô tả</th>
                         <th scope="col">Số lượng</th>
                         <th scope="col">Trạng thái</th>
-                        <th></th>
-                        <th></th>
+                        <th>Sữa</th>
+                        <th>Xóa</th>
+                        <th>Xem</th>
                         <th></th>
 
 
                     </tr>
                     </thead>
-                    {product_list && product_list.map((item, index) => (
-                        <tbody key={index}>
-                        <tr>
-                            <th scope="row">{index + 1}</th>
-                            <td>{item.MaSp}</td>
-                            <td>{item.TenSp}</td>
-                            <td>{item.TenLoai}</td>
-                            <td>{item.GiaSp}</td>
-                            <td>
-                                <img src={item.ImageURL} width={50} height={50}/>
-                            </td>
-                            <td>{item.MoTaChiTiet}</td>
-                            <td>{item.SoluongSp}</td>
-                            <td>{item.TinhTrang}</td>
+                    {displayPro}
 
-                            <td>
-                                <Link to={`/suasp/${item.id}`}>
-                                    <i className="bi bi-pencil-square"
-                                       style={{color: 'green'}}
-                                       onClick={()=>{updateProduct(item.id)}}
 
-                                    ></i>
-                                </Link>
-                            </td>
-                            <td>
-                                <i className="bi bi-trash-fill"
-                                   style={{color: 'red'}}
-                                   onClick={()=>{deleteProduct(item.id)}}
 
-                                ></i>
-                            </td>
-                            <td>
-                                <i className="bi bi-eye-fill"
-                                   style={{color: 'blue'}}
-                                   onClick= {() => handleModal(item.id)}
 
-                                ></i>
-                            </td>
-                        </tr>
-                        {modalOpen && (
-                            <MDBModal
-                                show={modalOpen}
-                                tabIndex='-1'>
-                                <MDBModalDialog>
-                                    <MDBModalContent>
-                                        <MDBModalHeader style={{background:'green'}}>
-                                            <MDBModalTitle style={{color:'white',alignContent:'center'}}>THÔNG TIN SẢN PHẨM</MDBModalTitle>
-                                            <MDBBtn
-                                                color='yellow'
-                                                onClick={handleCloseModal}
-                                            ><i class="bi bi-x-square-fill"></i></MDBBtn>
-                                        </MDBModalHeader>
-                                        <MDBModalBody>{modalBody}</MDBModalBody>
-                                        <MDBModalFooter>
-                                            <MDBBtn
-                                                style={{background:'red'}}
-                                                onClick={handleCloseModal}>
-                                                Đóng
-                                            </MDBBtn>
-                                        </MDBModalFooter>
-                                    </MDBModalContent>
-                                </MDBModalDialog>
-                            </MDBModal>
-                        )}
-                        </tbody>
-                    ))}
                 </table>
+                <ReactPaginate
+                    previousLabel={"Trước"}
+                    nextLabel={"Sau"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                />
+                {modalOpen && (
+                    <MDBModal
+                        show={modalOpen}
+                        tabIndex='-1'>
+                        <MDBModalDialog>
+                            <MDBModalContent>
+                                <MDBModalHeader style={{background:'green'}}>
+                                    <MDBModalTitle style={{color:'white',alignContent:'center'}}>THÔNG TIN SẢN PHẨM</MDBModalTitle>
+                                    <MDBBtn
+                                        color='yellow'
+                                        onClick={handleCloseModal}
+                                    ><i class="bi bi-x-square-fill"></i></MDBBtn>
+                                </MDBModalHeader>
+                                <MDBModalBody>{modalBody}</MDBModalBody>
+                                <MDBModalFooter>
+                                    <MDBBtn
+                                        style={{background:'red'}}
+                                        onClick={handleCloseModal}>
+                                        Đóng
+                                    </MDBBtn>
+                                </MDBModalFooter>
+                            </MDBModalContent>
+                        </MDBModalDialog>
+                    </MDBModal>
+                )}
             </div>
 
 

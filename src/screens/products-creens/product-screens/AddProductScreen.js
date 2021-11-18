@@ -71,6 +71,7 @@ const AddProductScreen = () => {
     };
 
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // if(!MaSp || !TenSp|| !TenLoai || !GiaSp || !ImageURL || !MoTaChiTiet||!SoluongSp || !TinhTrang){
@@ -99,6 +100,12 @@ const AddProductScreen = () => {
 
             dispatch(addProductInitiate(state));
             //history.push('/sanpham');
+        if(window.alert("Thêm thành công"))
+        {
+
+        }
+
+
 
 
 

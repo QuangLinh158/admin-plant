@@ -12,6 +12,7 @@ import {
     MDBModalHeader,
     MDBModalTitle
 } from "mdb-react-ui-kit";
+import ReactPaginate from "react-paginate";
 
 const initialState = {
     MaLoai: "",
@@ -27,13 +28,70 @@ const CateScreen = () => {
     const {MaLoai,TenLoai} = state;
     const {categories,category}=useSelector(state =>state.categories)
     const [modalOpen, setModalOpen] = useState(false);
+    const handleModal = (id) => {
+        setModalOpen(!modalOpen);
+        dispatch(getOneCateInitiate(id));
+    };
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+    const [pageNumber, setPageNumber] = useState(0);
+    const [searchCate, setSearchCate] = useState('');
+    const searchText = (event) => {
+        setSearchCate(event.target.value);
+    }
+    let dataSearch = categories.filter(item => {
+        return Object.keys(item).some(key =>
+            item[key].toString().toLowerCase().includes(searchCate.toString().toLowerCase())
+        );
+    });
+    //phan trang
+    const cate_PerPage = 10;
+    const pagesVisited = pageNumber * cate_PerPage;
+    const displayCate = dataSearch.slice(pagesVisited, pagesVisited + cate_PerPage)
+        .map((item,index) => {
+            return(
+                <tbody key={index} >
+                <tr >
+                    <th scope="row">{index+1}</th>
+                    <td>{item.MaLoai}</td>
+                    <td>{item.TenLoai}</td>
 
+                    <td>
+                        <Link to={`/sualoai/${item.id}`}>
+                            <i className="bi bi-pencil-square"
+                               style={{color:'green'}}
+                               onClick= {() => updateCate(item.id)}
+                            ></i>
+                        </Link>
+                    </td>
+                    <td>
+                        <i className="bi bi-trash-fill"
+                           style={{color:'red'}}
+                           onClick= {() => deleteCate(item.id)}
+                        ></i>
+                    </td>
+                    <td>
+                        <i className="bi bi-eye-fill"
+                           style={{color:'blue'}}
+                           onClick= {() => handleModal(item.id)}
+                        ></i>
+                    </td>
+                </tr>
+                </tbody>
+            );
+        });
+
+    const pageCount = Math.ceil(categories.length /cate_PerPage);
+    const changePage = ({selected}) =>{
+        setPageNumber(selected);
+    }
     useEffect(() => {
         dispatch(getCateInitiate());
     }, []);
 
 
-   const deleteCate = (id) => {
+     const deleteCate = (id) => {
         if(window.confirm("Bạn muốn xóa loại sản phẩm này không ?")){
             dispatch(deleteCatetInitiate(id));
          }
@@ -42,32 +100,17 @@ const CateScreen = () => {
          dispatch(getOneCateInitiate(id));
      };
 
-    // const modalBody = (
-    //     <div className="row">
-    //         <div className="col-sm-5" style={{fontWeight:'bold'}}>Mã Khuyến Mãi:</div>
-    //         <div className="col-sm-7">{discount.MaKhuyenMai}</div>
-    //
-    //         <div className="col-sm-5" style={{fontWeight:'bold'}}>Tên Khuyến Mãi:</div>
-    //         <div className="col-sm-7">{discount.TenKhuyenMai}</div>
-    //
-    //         <div className="col-sm-5" style={{fontWeight:'bold'}}>Khuyến Mãi Tối Đa:</div>
-    //         <div className="col-sm-7">{discount.KhuyenMaiToiDa}(vnd)</div>
-    //
-    //         <div className="col-sm-5" style={{fontWeight:'bold'}}>Chiết Khấu:</div>
-    //         <div className="col-sm-7">{discount.ChietKhau}%</div>
-    //
-    //         <div className="col-sm-5" style={{fontWeight:'bold'}}>Tình Trạng:</div>
-    //         <div className="col-sm-7">{discount.TinhTrangKhuyenMai}</div>
-    //
-    //     </div>
-    // );
-    // const handleModal = (id) => {
-    //     setModalOpen(!modalOpen);
-    //     dispatch(getDiscountInitiatee(id));
-    // };
-    // const handleCloseModal = () => {
-    //     setModalOpen(false);
-    // };
+    const modalBody = (
+        <div className="row">
+            <div className="col-sm-5" style={{fontWeight:'bold'}}>Mã Khuyến Mãi:</div>
+            <div className="col-sm-7">{category.MaLoai}</div>
+
+            <div className="col-sm-5" style={{fontWeight:'bold'}}>Tên Khuyến Mãi:</div>
+            <div className="col-sm-7">{category.TenLoai}</div>
+
+        </div>
+    );
+
 
     return (
         <div className="backgroundDiscount" style={{background:"white", padding:20, marginTop:-38}}>
@@ -76,7 +119,12 @@ const CateScreen = () => {
                     <button type="button" className="btn btn-success" style={{marginLeft:15, height:37,background:'green'}}><i className="bi bi-plus-circle"></i></button>
                 </Link>
                 <div className="input-group" style={{width:300, height:30, marginLeft:15}}>
-                    <input type="text" className="form-control" placeholder="Tìm Kiếm ..."/>
+                    <input type="text"
+                           className="form-control"
+                           placeholder="Tìm Kiếm ..."
+                           value = {searchCate}
+                           onChange = {searchText.bind(this)}
+                    />
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary" type="button" id="button-addon2" style={{background:'green',color:'white'}}><i className="bi bi-search"></i></button>
                     </div>
@@ -99,42 +147,45 @@ const CateScreen = () => {
 
                     </tr>
                     </thead>
-                    {categories && categories.map((item, index) => (
-                        <tbody key={index}>
-                        <tr>
-                            <th scope="row">{index + 1}</th>
-                            <td>{item.MaLoai}</td>
-                            <td>{item.TenLoai}</td>
-
-                            <td>
-                                <Link to={`/sualoai/${item.id}`}>
-                                    <i className="bi bi-pencil-square"
-                                       style={{color: 'green'}}
-                                       onClick={()=>updateCate(item.id)}
-
-                                    ></i>
-                                </Link>
-                            </td>
-                            <td>
-                                <i className="bi bi-trash-fill"
-                                   style={{color: 'red'}}
-                                   onClick={()=>deleteCate(item.id)}
-
-                                ></i>
-                            </td>
-                            <td>
-                                <i className="bi bi-eye-fill"
-                                   style={{color: 'blue'}}
-
-
-                                ></i>
-                            </td>
-                        </tr>
-                     </tbody>
-                    ))}
+                    {displayCate}
                 </table>
+                <ReactPaginate
+                    previousLabel={"Trước"}
+                    nextLabel={"Sau"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                />
             </div>
-
+            {modalOpen && (
+                <MDBModal
+                    show={modalOpen}
+                    tabIndex='-1'>
+                    <MDBModalDialog>
+                        <MDBModalContent>
+                            <MDBModalHeader style={{background:'green'}}>
+                                <MDBModalTitle style={{color:'white',alignContent:'center'}}>THÔNG TIN SẢN PHẨM</MDBModalTitle>
+                                <MDBBtn
+                                    color='yellow'
+                                    onClick={handleCloseModal}
+                                ><i class="bi bi-x-square-fill"></i></MDBBtn>
+                            </MDBModalHeader>
+                            <MDBModalBody>{modalBody}</MDBModalBody>
+                            <MDBModalFooter>
+                                <MDBBtn
+                                    style={{background:'red'}}
+                                    onClick={handleCloseModal}>
+                                    Đóng
+                                </MDBBtn>
+                            </MDBModalFooter>
+                        </MDBModalContent>
+                    </MDBModalDialog>
+                </MDBModal>
+            )}
 
         </div>
     )
