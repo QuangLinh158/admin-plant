@@ -102,6 +102,7 @@ const AddNewsScreen = () => {
 
     return (
         <div className="backgroundProduct" style={{background:"white", padding:20, marginTop:-25}}>
+            <h5>Tin Tức</h5>
             <div style={{background:'green',color:'white',width:250,display:'flex',
                 padding:3,borderTopLeftRadius:10,borderTopRightRadius:10}}>
                 <h4 style={{margin:'auto'}}>Thêm Tin Tức Mới</h4>
