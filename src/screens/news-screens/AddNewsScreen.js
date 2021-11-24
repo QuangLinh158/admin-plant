@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
-
-import { DateRangePickerComponent} from '@syncfusion/ej2-react-calendars';
+import React, {useEffect, useState} from 'react';
 import {useHistory}  from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import {addCateInitiate} from "../../../redux/category-reducer/action";
-import {storage} from "../../../firebase";
-import {addNewsInitiate} from "../../../redux/news-reducer/action";
+import {useDispatch, useSelector} from 'react-redux';
+
+import firebase,{storage} from "../../firebase";
+import {addNewsInitiate} from "../../redux/news-reducer/action";
 
 
 
 const initialState = {
-    MaLoai:'',
-    TenLoai:'',
-    imgLoai:""
+    MaTT:"",
+    ImageTTURL:"",
+    TenTT:"",
+    NoiDungTT:""
 }
 
-const AddCate = () => {
-   //image processing
+const AddNewsScreen = () => {
+
+
 
     const [image, setImage] = React.useState("");
     const imageRef = React.useRef(null);
@@ -42,83 +42,97 @@ const AddCate = () => {
 
     const { result, uploader } = useDisplayImage()
 
-
     const [state, setState] = useState(initialState);
     const [errorMsg, setErrorMsg] = useState(null);
-    const {MaLoai,TenLoai,imgLoai} = state;
+    const {MaTT,ImageTTURL,TenTT,NoiDungTT} = state;
 
     const dispatch = useDispatch();
     const history = useHistory();
 
+
+
+
     const handleInputChange = (e) => {
         let { name, value} = e.target;
+        console.log(name,value)
+
         setState({ ...state, [name]: value});
     };
+
+
+
     const handleSubmit = (e) => {
-         e.preventDefault();
-        // if(!MaLoai|| !TenLoai||!imgLoai){
+        e.preventDefault();
+        // if(!MaSp || !TenSp|| !TenLoai || !GiaSp || !ImageURL || !MoTaChiTiet||!SoluongSp || !TinhTrang){
         //     setErrorMsg(alert("Please enter all info"));
         // }
         // else
         // {
+        //setState({MaSp:"", TenSp:"", MaLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
 
-        const uploadCateImage = storage.storage.ref(`/images_categories/${image.name}`).put(image)
+        const uploadTask = storage.storage.ref(`/images_news/${image.name}`).put(image)
 
-            uploadCateImage.on('state_changed',
+        uploadTask.on('state_changed',
             (snapshoty) => {
                 console.log(snapshoty)
             }, (err) => {
                 console.log(e)
             }, () => {
-                storage.storage.ref('images_categories').child(image.name).getDownloadURL()
+                storage.storage.ref('images_news').child(image.name).getDownloadURL()
                     .then(url => {
+
                         return url;
                     })
                     .then((url) => {
-                        setState({...state,imgLoai: url})
+
+                        setState({...state,ImageTTURL: url})
                     })
             })
 
-        dispatch(addCateInitiate(state));
+        dispatch(addNewsInitiate(state));
         //history.push('/sanpham');
         if(window.alert("Thêm thành công"))
         {
 
         }
 
-
     };
 
+
+
     return (
-        <div className="backgroundDiscount" style={{background:"white", padding:20, marginTop:-25}}>
+        <div className="backgroundProduct" style={{background:"white", padding:20, marginTop:-25}}>
             <div style={{background:'green',color:'white',width:250,display:'flex',
                 padding:3,borderTopLeftRadius:10,borderTopRightRadius:10}}>
-                <h4 style={{margin:'auto'}}>Thêm loại sản phẩm</h4>
+                <h4 style={{margin:'auto'}}>Thêm Tin Tức Mới</h4>
             </div>
 
             <div className="hr"></div>
 
             <form onSubmit={handleSubmit} className="row" style={{marginTop:10,color:'green'}}>
-                <div className="col-md-12">
-                    <label  className="form-label">Mã loại</label>
+                <div className='col-md-12'>
+                    <label  className="form-label">Mã Tin Tức</label>
                     <input
                         type="text"
                         className="form-control"
-                        value={MaLoai}
-                        name="MaLoai"
+                        value={MaTT}
+                        name="MaTT"
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="col-md-12">
-                    <label className="form-label">Tên loại</label>
+                <div className='col-md-12'>
+                    <label className="form-label">Tên TT</label>
                     <input
                         type="text"
                         className="form-control"
-                        value={TenLoai}
-                        name="TenLoai"
+                        value={TenTT}
+                        name="TenTT"
                         onChange={handleInputChange}
                     />
                 </div>
+
+
+
                 <div className='col-md-12'>
                     <br/>
                     <label className="form-label">Hình ảnh</label>
@@ -126,7 +140,7 @@ const AddCate = () => {
 
                         <input
                             type="file"
-                            defaultValue={state.imgLoai}
+                            defaultValue={state.ImageTTURL}
                             //value={state.ImageURL}
                             onChange={(e) => {
                                 setImage(e.target.files[0]);
@@ -148,14 +162,29 @@ const AddCate = () => {
                     </div>
 
                 </div>
+                <div className='col-md-12'>
+                    <br/>
+                    <label className="form-label">Nội dung</label>
+                    <div className="input-group">
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={NoiDungTT}
+                            name="NoiDungTT"
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
-                <div className='col-md-12' >
-                    <label  className="form-label">Chọn</label>
+                </div>
+
+                <div className='col-md-12'>
+                    <br/><br/>
                     <button type="submit" className="btn btn-success btn-block">Tạo</button>
                 </div>
+
             </form>
         </div>
     )
 }
 
-export default AddCate;
+export default AddNewsScreen;

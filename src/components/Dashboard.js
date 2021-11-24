@@ -29,6 +29,8 @@ import ProductScreen from "../screens/products-creens/Products";
 import AddProductScreen from "../screens/products-creens/product-screens/AddProductScreen";
 import UpdateProductScreen from "../screens/products-creens/product-screens/UpdateProductScreen";
 import Login from "../screens/Login";
+import AddNewsScreen from "../screens/news-screens/AddNewsScreen";
+import NewsScreen from "../screens/News";
 
 const Dashboard = ({history}) => {
 
@@ -68,9 +70,9 @@ const user = auth.currentUser;
               <Router exact path={'/khachhang'}>
                   <Users />
               </Router>
-              <Router exact path={'/tintuc'}>
-                  <News />
-              </Router>
+              {/*<Router exact path={'/tintuc'}>*/}
+              {/*<News></News>*/}
+              {/*</Router>*/}
               {/*<Router exact path={'/loaisanpham'}>*/}
               {/*    <CategoriesProduct />*/}
               {/*</Router>*/}
@@ -116,6 +118,9 @@ const user = auth.currentUser;
                 <Route path="/sanpham" component={ProductScreen} />
                 <Route path="/themsp" component={AddProductScreen} />
                 <Route path="/suasp/:id" component={UpdateProductScreen} />
+
+                <Route path="/tintuc" component={NewsScreen} />
+                <Route path="/themtt" component={AddNewsScreen} />
 
 
 
