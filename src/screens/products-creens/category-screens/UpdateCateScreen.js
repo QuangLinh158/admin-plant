@@ -5,7 +5,7 @@ import {updateCateInitiate} from "../../../redux/category-reducer/action";
 
 const initialState = {
     MaLoai:"",
-    TenLoai:""
+    TenLoai:"",
 }
 
 const UpdateCateScreen = (props) => {
