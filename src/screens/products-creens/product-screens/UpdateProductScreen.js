@@ -5,19 +5,26 @@ import {updateProductInitiate} from "../../../redux/product-redux/action";
 import * as url from "url";
 import {getCateInitiate} from "../../../redux/category-reducer/action";
 import {storage} from "../../../firebase";
+import {DatePickerComponent} from "@syncfusion/ej2-react-calendars/src/datepicker/datepicker.component";
 
 const initialState = {
     MaSp:"",
     TenSp:"",
     TenLoai:"",
+    GiaNhapSp: 0,
     GiaSp:0,
     ImageURL:"",
     MoTaChiTiet:"",
     SoluongSp:0,
+    NgayNhapSp: "",
     TinhTrang:""
 }
 
 const UpdateProductScreen = (props) => {
+    const startValue:Date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
+    //const endValue:Date = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 20 );
+    const minDate:Date = new Date(new Date().getFullYear(), new Date().getMonth(), 4);
+    //const maxDate:Date = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 20);
     //image
     const [image, setImage] = React.useState("");
     const imageRef = React.useRef(null);
@@ -42,7 +49,7 @@ const UpdateProductScreen = (props) => {
     //image
     const [state, setState] = useState(initialState);
     const [errorMsg, setErrorMsg] = useState(null);
-    const {MaSp,TenSp,TenLoai,GiaSp,ImageURL,MoTaChiTiet,SoluongSp,TinhTrang} = state;
+    const {MaSp,TenSp,TenLoai,GiaNhapSp,GiaSp,ImageURL,MoTaChiTiet,SoluongSp,NgayNhapSp,TinhTrang} = state;
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -154,7 +161,23 @@ const UpdateProductScreen = (props) => {
                 </div>
                 <div className='col-md-12'>
                     <br/>
-                    <label className="form-label">Giá sản phẩm</label>
+                    <label className="form-label">Giá nhập</label>
+                    <div className="input-group">
+                        <input
+                            type='text'
+                            className="form-control"
+                            value={GiaNhapSp}
+                            name="GiaNhapSp"
+                            onChange={handleInputChange}
+                        />
+                        <div className="input-group-append">
+                            <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
+                        </div>
+                    </div>
+                </div>
+                <div className='col-md-12'>
+                    <br/>
+                    <label className="form-label">Giá bán</label>
                     <div className="input-group">
                         <input
                             type='text'
@@ -233,6 +256,22 @@ const UpdateProductScreen = (props) => {
 
                     </div>
 
+                </div>
+                <div className="col-md-12">
+                    <br/>
+                    <label className="form-label">Ngày nhập</label>
+                    <DatePickerComponent
+                        placeholder="Chọn ngày"
+                        startDate={startValue}
+                        //endDate={endValue}
+                        min={minDate}
+                        //max={maxDate}
+                        minDays={1}
+                        maxDays={30}
+                        value={NgayNhapSp}
+                        name="NgayNhapSp"
+                        onChange={handleInputChange}
+                    ></DatePickerComponent>
                 </div>
                 <div className="col-md-12">
                     <br/>

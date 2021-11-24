@@ -16,7 +16,8 @@ import ReactPaginate from "react-paginate";
 
 const initialState = {
     MaLoai: "",
-    TenLoai: ""
+    TenLoai: "",
+    imgLoai: ""
 }
 // tui sua code cai
 //dt tui goi video ko dc hu loa ngoaoi roi
@@ -25,7 +26,7 @@ const CateScreen = () => {
     const [state, setState] = useState(initialState);
     const dispatch = useDispatch();
 
-    const {MaLoai,TenLoai} = state;
+    const {MaLoai,TenLoai,imgLoai} = state;
     const {categories,category}=useSelector(state =>state.categories)
     const [modalOpen, setModalOpen] = useState(false);
     const handleModal = (id) => {
@@ -56,6 +57,7 @@ const CateScreen = () => {
                     <th scope="row">{index+1}</th>
                     <td>{item.MaLoai}</td>
                     <td>{item.TenLoai}</td>
+                    <td><img src={item.imgLoai} height={50} width={50}/></td>
 
                     <td>
                         <Link to={`/sualoai/${item.id}`}>
@@ -102,11 +104,14 @@ const CateScreen = () => {
 
     const modalBody = (
         <div className="row">
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Mã Khuyến Mãi:</div>
+            <div className="col-sm-5" style={{fontWeight:'bold'}}>Mã Loại:</div>
             <div className="col-sm-7">{category.MaLoai}</div>
 
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Tên Khuyến Mãi:</div>
+            <div className="col-sm-5" style={{fontWeight:'bold'}}>Tên Loại:</div>
             <div className="col-sm-7">{category.TenLoai}</div>
+
+            <div className="col-sm-5" style={{fontWeight:'bold'}}>Hình ảnh:</div>
+            <div className="col-sm-7"><img src={category.imgLoai} height={50} width={50}/></div>
 
         </div>
     );
@@ -141,6 +146,7 @@ const CateScreen = () => {
                         <th scope="col">STT</th>
                         <th scope="col">Mã loại</th>
                         <th scope="col">Tên loại</th>
+                        <th scope="col">Hình ảnh</th>
                         <th scope="col">Sữa</th>
                         <th scope="col">Xóa</th>
                         <th scope="col">Xem</th>
