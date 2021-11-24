@@ -99,14 +99,17 @@ const UpdateProductScreen = (props) => {
                 })
             dispatch(updateProductInitiate(id,state));
             setState({MaSp:"", TenSp:"", TenLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
+
+            window.alert("Bạn cập nhật thành công!");
             history.push('/sanpham');
+
         }
     };
     return (
         <div className="backgroundDiscount" style={{background:"white", padding:20, marginTop:-25}}>
             <div style={{background:'green',color:'white',width:300,display:'flex',
                 padding:3,borderTopLeftRadius:10,borderTopRightRadius:10}}>
-                <h4 style={{margin:'auto'}}>Cập nhật loại sản phẩm</h4>
+                <h4 style={{margin:'auto'}}>Cập nhật sản phẩm</h4>
             </div>
 
             <div className="hr"></div>

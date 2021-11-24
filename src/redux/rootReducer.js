@@ -1,12 +1,11 @@
 import { combineReducers } from "redux";
-import cateReducer from "./category-reducer/reducer";
 import discountReducer from "./discount-reducer/reducer";
+import cateReducer from "./category-reducer/reducer";
 import productReducer from "./product-redux/reducer";
 
-
 const rootReducer = combineReducers({
-    categories: cateReducer,
-    discounts : discountReducer,
+    discounts: discountReducer,
+    categories:cateReducer,
     products:productReducer
 });
 
