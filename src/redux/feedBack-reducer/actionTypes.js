@@ -1,0 +1,5 @@
+export const DELETE_FEEDBACK = "DELETE_FEEDBACK";
+export const UPDATE_FEEDBACK = "UPDATE_FEEDBACK";
+export const GET_FEEDBACKS = "GET_FEEDBACKS";
+export const GET_FEEDBACK = "GET_FEEDBACK";
+export const RESET = "RESET";

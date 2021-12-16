@@ -128,76 +128,16 @@ const AddProductScreen = () => {
             <div className="hr"></div>
 
             <form onSubmit={handleSubmit} className="row" style={{marginTop:10,color:'green'}}>
-                <div className='col-md-12'>
-                    <label  className="form-label">Mã sản phẩm</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={MaSp}
-                        name="MaSp"
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className='col-md-12'>
-                    <label className="form-label">Tên sản phẩm</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={TenSp}
-                        name="TenSp"
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-md-12">
-                    <br/>
-                    <label className="form-label">Loại sản phẩm</label>
-                    <select
-                        name="TenLoai"
-                        className="input-group"
-                        onChange={handleInputChange}
-                    >
-                        {categories.map((item)=> {
-                            return (
-                                <option value={item.TenLoai}>{item.TenLoai}</option>
-                            )
-                        })}
+            <div className='col-md-4'>
+                   <div className='img-frame'>
+                       <div className="input-group">
+                           <br/>
+                           {result && <img ref={imageRef} src={result} alt="" height={100} width={100}/>}
+                       </div>
+                   </div>
 
-
-                    </select>
                 </div>
-                <div className='col-md-12'>
-                    <br/>
-                    <label className="form-label">Giá nhập</label>
-                    <div className="input-group">
-                        <input
-                            type='text'
-                            className="form-control"
-                            value={GiaNhapSp}
-                            name="GiaNhapSp"
-                            onChange={handleInputChange}
-                        />
-                        <div className="input-group-append">
-                            <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
-                        </div>
-                    </div>
-                </div>
-                <div className='col-md-12'>
-                    <br/>
-                    <label className="form-label">Giá sản phẩm</label>
-                    <div className="input-group">
-                        <input
-                            type='text'
-                            className="form-control"
-                            value={GiaSp}
-                            name="GiaSp"
-                            onChange={handleInputChange}
-                        />
-                        <div className="input-group-append">
-                            <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
-                        </div>
-                    </div>
-                </div>
-                <div className='col-md-12'>
+            <div className='col-md-12'>
                     <br/>
                     <label className="form-label">Hình ảnh sản phẩm</label>
                     <div className="input-group" >
@@ -215,18 +155,82 @@ const AddProductScreen = () => {
                             />
                     </div>
 
-                </div>
-                <div className='col-md-12'>
-                    <br/>
-                   <div className='img-frame'>
-                       <div className="input-group">
-                           <br/>
-                           {result && <img ref={imageRef} src={result} alt="" height={100} width={100}/>}
-                       </div>
-                   </div>
+            </div>
+                
 
+                <div className='col-md-4'>
+                    <label  className="form-label">Mã sản phẩm</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={MaSp}
+                        name="MaSp"
+                        onChange={handleInputChange}
+                    />
                 </div>
-                <div className='col-md-12'>
+                <div className='col-md-4'>
+                    <label className="form-label">Tên sản phẩm</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={TenSp}
+                        name="TenSp"
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div className="col-md-4">
+                    <label className="form-label">Loại sản phẩm</label>
+                    <div className="input-group">
+                        <select
+                            name="TenLoai"
+                            className="input-group"
+                            onChange={handleInputChange}
+                            className="custom-select" 
+                            id="inputGroupSelect02"
+                        >
+                            {categories.map((item)=> {
+                                return (
+                                    <option value={item.TenLoai}>{item.TenLoai}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
+                </div>
+                <div className='col-md-4'>
+                    <br/>
+                    <label className="form-label">Giá nhập</label>
+                    <div className="input-group">
+                        <input
+                            type='text'
+                            className="form-control"
+                            value={GiaNhapSp}
+                            name="GiaNhapSp"
+                            onChange={handleInputChange}
+                        />
+                        <div className="input-group-append">
+                            <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
+                        </div>
+                    </div>
+                </div>
+                <div className='col-md-4'>
+                    <br/>
+                    <label className="form-label">Giá sản phẩm</label>
+                    <div className="input-group">
+                        <input
+                            type='text'
+                            className="form-control"
+                            value={GiaSp}
+                            name="GiaSp"
+                            onChange={handleInputChange}
+                        />
+                        <div className="input-group-append">
+                            <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div className='col-md-4'>
                 <br/>
                 <label className="form-label">Mô tả sản phẩm</label>
                 <div className="input-group">
@@ -240,7 +244,7 @@ const AddProductScreen = () => {
                 </div>
 
             </div>
-                <div className='col-md-12'>
+                <div className='col-md-4'>
                     <br/>
                     <label className="form-label">Số lượng sản phẩm</label>
                     <div className="input-group">
@@ -258,7 +262,7 @@ const AddProductScreen = () => {
                     </div>
 
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <br/>
                     <label className="form-label">Ngày nhập</label>
                     <DatePickerComponent
@@ -274,7 +278,7 @@ const AddProductScreen = () => {
                         onChange={handleInputChange}
                     ></DatePickerComponent>
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <br/>
                     <label className="form-label">Tình trạng sản phẩm</label>
                     <div className="input-group">
@@ -295,7 +299,7 @@ const AddProductScreen = () => {
 
                     </div>
                 </div>
-                <div className='col-md-12'>
+                <div className='col-md-4'>
                     <br/><br/>
                     <button type="submit" className="btn btn-success btn-block">Tạo</button>
                 </div>

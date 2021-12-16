@@ -25,7 +25,6 @@ const initialState = {
     TinhTrang:""
 }
 
-
 const ProductScreen = () => {
 
     const [state, setState] = useState(initialState);
@@ -54,18 +53,14 @@ const ProductScreen = () => {
                 <tbody key={index} >
                 <tr >
                     <th scope="row">{index+1}</th>
-                    <td>{item.MaSp}</td>
+                    <td >
+                        <img src={item.ImageURL} width={50} height={50} style={{backgroundColor:"#74C69D", borderRadius:30}}/>
+                    </td>
                     <td>{item.TenSp}</td>
-                    <td>{item.TenLoai}</td>
                     <td>{item.GiaNhapSp}</td>
                     <td>{item.GiaSp}</td>
-                    <td>
-                        <img src={item.ImageURL} width={50} height={50}/>
-                    </td>
-                    <td>{item.MoTaChiTiet}</td>
                     <td>{item.SoluongSp}</td>
                     <td>{moment(item.NgayNhapSp[0]).format('MM-DD-YYYY').toString()}</td>
-                    <td>{item.TinhTrang}</td>
                     <td>
                         <Link to={`/suasp/${item.id}`}>
                             <i className="bi bi-pencil-square"
@@ -139,8 +134,8 @@ const ProductScreen = () => {
             <div className="col-sm-5" style={{fontWeight:'bold'}}>Số lượng:</div>
             <div className="col-sm-7">{product.SoluongSp}</div>
 
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Ngày nhập:</div>
-            <div className="col-sm-7">{moment(product.NgayNhapSp[0]).format('MM-DD-YYYY').toString()}</div>
+            {/* <div className="col-sm-5" style={{fontWeight:'bold'}}>Ngày nhập:</div>
+            <div className="col-sm-7">{moment(product.NgayNhapSp[0]).format('MM-DD-YYYY').toString()}</div> */}
 
             <div className="col-sm-5" style={{fontWeight:'bold'}}>Trạng thái:</div>
             <div className="col-sm-7">{product.TinhTrang}</div>
@@ -182,28 +177,19 @@ const ProductScreen = () => {
                     <thead className="thead-table">
                     <tr>
                         <th scope="col">STT</th>
-                        <th scope="col">Mã</th>
+                        <th scope="col">Hình ảnh</th>
                         <th scope="col">Tên</th>
-                        <th scope="col">Loại</th>
                         <th scope="col">Giá nhập</th>
                         <th scope="col">Giá bán</th>
-                        <th scope="col">Hình</th>
-                        <th scope="col">Mô tả</th>
                         <th scope="col">Số lượng</th>
-                        <th scope="col">Ngày nhập:</th>
-                        <th scope="col">Trạng thái</th>
-                        <th>Sữa</th>
-                        <th>Xóa</th>
-                        <th>Xem</th>
+                        <th scope="col">Ngày nhập</th>
                         <th></th>
-
-
+                        <th></th>
+                        <th></th>
                     </tr>
                     </thead>
+
                     {displayPro}
-
-
-
 
                 </table>
                 <ReactPaginate
@@ -243,8 +229,6 @@ const ProductScreen = () => {
                     </MDBModal>
                 )}
             </div>
-
-
         </div>
     )
 }

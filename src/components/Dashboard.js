@@ -13,11 +13,28 @@ import Discount from '../screens/Discount';
 //import Invoices from '../screens/Invoices';
 import Statistic from '../screens/Statistic';
 import InvoiceState from '../screens/InvoiceState';
+
 import UnconfirmInvoice from '../screens/UnconfirmInvoice';
+import EditUnconfirmVoice from '../screens/EditUnconfirmVoice';
+
 import ConfirmInvoice from '../screens/ConfirmInvoice';
-import Delivering from '../screens/delivering';
+import EditConfirmvoice from '../screens/EditConfirmvoice';
+
+import Delivering from '../screens/Delivering';
+import EditDelivering from '../screens/EditDelivering';
+
 import DeliverInvoice from '../screens/DeliverInvoice';
 import CancelInvoice from '../screens/CancelInvoice';
+
+import FeedBack from '../screens/FeedBack';
+
+import Pending from '../screens/Pending';
+import EditFeedback from '../screens/EditFeedback';
+
+import HideFeedBack from '../screens/HideFeedBack';
+
+import ShowFeedBack from '../screens/ShowFeedBack';
+
 
 import AddDiscount from '../screens/AddDiscount';
 import EditDiscount from '../screens/EditDiscount';
@@ -69,32 +86,16 @@ const user = auth.currentUser;
               <Router exact path={'/khachhang'}>
                   <Users />
               </Router>
-              {/*<Router exact path={'/tintuc'}>*/}
-              {/*<News></News>*/}
-              {/*</Router>*/}
-              {/*<Router exact path={'/loaisanpham'}>*/}
-              {/*    <CategoriesProduct />*/}
-              {/*</Router>*/}
-              {/*<Router exact path={'/sanpham'}>*/}
-              {/*    <Products />*/}
-              {/*</Router>*/}
-              {/* <Router exact path={'/hoadon'}>
-                  <Invoices />
-              </Router> */}
               <Router exact path={'/thongke'}>
                   <Statistic />
               </Router>
+
+              <Router exact path={'/danhgia'}>
+                  <FeedBack />
+              </Router>
+
               <Router exact path={'/trangthaidon'}>
                   <InvoiceState />
-              </Router>
-              <Router exact path={'/trangthaidon/dxn'}>
-                  <ConfirmInvoice />
-              </Router>
-              <Router exact path={'/trangthaidon/cxn'}>
-                  <UnconfirmInvoice />
-              </Router>
-              <Router exact path={'/trangthaidon/dg'}>
-                  <Delivering/>
               </Router>
               <Router exact path={'/trangthaidon/ddg'}>
                   <DeliverInvoice />
@@ -102,7 +103,6 @@ const user = auth.currentUser;
               <Router exact path={'/trangthaidon/ddh'}>
                   <CancelInvoice />
               </Router>
-
 
             </Switch>
 
@@ -121,7 +121,20 @@ const user = auth.currentUser;
                 <Route path="/tintuc" component={NewsScreen} />
                 <Route path="/themtt" component={AddNewsScreen} />
 
+                <Route path='/trangthaidon/cxn' component={UnconfirmInvoice}/>
+                <Route path="/suahdcxn/:id" component={EditUnconfirmVoice}/>
 
+                <Route path={'/trangthaidon/dxn'} component={ConfirmInvoice}/>
+                <Route path="/suahdxn/:id" component={EditConfirmvoice}/>
+
+                <Route path='/trangthaidon/dg' component={Delivering}/>
+                <Route path="/suahddg/:id" component={EditDelivering}/>
+
+                <Route path="/danhgia/choduyet" component={Pending}/>
+                <Route path="/suadanhgia/:id" component={EditFeedback}/>
+                
+                <Route path="/danhgia/an" component={HideFeedBack} />
+                <Route path="/danhgia/hienthi" component={ShowFeedBack} />
 
 
             </div>

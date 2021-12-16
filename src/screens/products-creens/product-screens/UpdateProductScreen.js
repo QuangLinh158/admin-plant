@@ -122,7 +122,32 @@ const UpdateProductScreen = (props) => {
             <div className="hr"></div>
 
             <form onSubmit={handleSubmit} className="row" style={{marginTop:20,color:'green'}}>
-                <div className="col-md-12">
+            <div className='col-md-12'>
+                    <label className="form-label">Hình ảnh sản phẩm</label>
+                    <div className="input-group" >
+                        <input
+                            type="file"
+                            defaultValue={state.ImageURL}
+                            //value={state.ImageURL}
+                            onChange={(e) => {
+                                setImage(e.target.files[0]);
+                                uploader(e);
+
+                            }}
+                            name="ImageURL"
+                        />
+
+                    </div>
+                </div>
+                <div className='col-md-12'>
+                    <div className='img-frame'>
+                        <div className="input-group">
+                            <br/>
+                            {result && <img ref={imageRef} src={result} alt="" height={100} width={100}/>}
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-4">
                     <label  className="form-label">Mã loại</label>
                     <input
                         type="text"
@@ -132,7 +157,7 @@ const UpdateProductScreen = (props) => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <label className="form-label">Tên Loại</label>
                     <input
                         type="text"
@@ -142,24 +167,25 @@ const UpdateProductScreen = (props) => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="col-md-12">
-                    <br/>
+                <div className="col-md-4">
                     <label className="form-label">Loại sản phẩm</label>
-                    <select
-                        name="TenLoai"
-                        className="input-group"
-                        onChange={handleInputChange}
-                    >
-                        {categories.map((item)=> {
-                            return (
-                                <option value={item.TenLoai}>{item.TenLoai}</option>
-                            )
-                        })}
-
-
-                    </select>
+                    <div className="input-group">
+                        <select
+                            name="TenLoai"
+                            className="input-group"
+                            onChange={handleInputChange}
+                            className="custom-select"
+                            id="inputGroupSelect02"
+                        >
+                            {categories.map((item)=> {
+                                return (
+                                    <option value={item.TenLoai}>{item.TenLoai}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
                 </div>
-                <div className='col-md-12'>
+                <div className='col-md-4'>
                     <br/>
                     <label className="form-label">Giá nhập</label>
                     <div className="input-group">
@@ -175,7 +201,7 @@ const UpdateProductScreen = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className='col-md-12'>
+                <div className='col-md-4'>
                     <br/>
                     <label className="form-label">Giá bán</label>
                     <div className="input-group">
@@ -191,38 +217,9 @@ const UpdateProductScreen = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className='col-md-12'>
-                    <br/>
-                    <label className="form-label">Hình ảnh sản phẩm</label>
-                    <div className="input-group" >
+                
 
-
-                        <input
-                            type="file"
-                            defaultValue={state.ImageURL}
-                            //value={state.ImageURL}
-                            onChange={(e) => {
-                                setImage(e.target.files[0]);
-                                uploader(e);
-
-                            }}
-                            name="ImageURL"
-                        />
-
-                    </div>
-
-                </div>
-                <div className='col-md-12'>
-                    <br/>
-                    <div className='img-frame'>
-                        <div className="input-group">
-                            <br/>
-                            {result && <img ref={imageRef} src={result} alt="" height={100} width={100}/>}
-                        </div>
-                    </div>
-
-                </div>
-                <div className='col-md-12'>
+                <div className='col-md-4'>
                     <br/>
                     <label className="form-label">Mô tả sản phẩm</label>
                     <div className="input-group">
@@ -239,7 +236,7 @@ const UpdateProductScreen = (props) => {
                     </div>
 
                 </div>
-                <div className='col-md-12'>
+                <div className='col-md-4'>
                     <br/>
                     <label className="form-label">Số lượng sản phẩm</label>
                     <div className="input-group">
@@ -257,7 +254,7 @@ const UpdateProductScreen = (props) => {
                     </div>
 
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <br/>
                     <label className="form-label">Ngày nhập</label>
                     <DatePickerComponent
@@ -273,7 +270,7 @@ const UpdateProductScreen = (props) => {
                         onChange={handleInputChange}
                     ></DatePickerComponent>
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <br/>
                     <label className="form-label">Tình trạng sản phẩm</label>
                     <div className="input-group">
@@ -295,7 +292,7 @@ const UpdateProductScreen = (props) => {
                     </div>
                 </div>
 
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <br/><br/>
                     <button type="submit" className="btn btn-success btn-block">Cập nhật</button>
                 </div>

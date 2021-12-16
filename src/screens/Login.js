@@ -1,6 +1,8 @@
 import React,{useState,useEffect, useRef} from 'react';
 import { Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { formatMs } from '@material-ui/core';
+import { invalid } from 'moment';
 
 
 const Login = ({history}) => {
@@ -46,6 +48,7 @@ const Login = ({history}) => {
         alert("Email không tồn tại");
     };
 
+
     return (
       <div style={{display:'flex'}} >
         {/* Backgrounds */}
@@ -66,7 +69,7 @@ const Login = ({history}) => {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     name="email"
-                    type="email" 
+                    type="text" 
                     className="form-control" 
                     id="exampleInputEmail1" 
                     aria-describedby="emailHelp" 
@@ -99,9 +102,9 @@ const Login = ({history}) => {
                   >
                       {loading ? '...' : 'Vào'}
                   </button>
-                  <Link to="/signup">
+                  {/* <Link to="/signup">
                         Đăng Ký
-                  </Link>
+                  </Link> */}
                   
                   {/* End Loging form */}
                 </div>

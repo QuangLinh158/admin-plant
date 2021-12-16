@@ -16,7 +16,15 @@ const menuItems = [
     {name: 'Khuyến Mãi', to:'/khuyenmai', iconClassName:'bi bi-tags-fill'},
     // {name: 'Hóa Đơn', to:'/hoadon', iconClassName:'bi bi-cash-stack'},
     {name: 'Thống Kê', to:'/thongke', iconClassName:'bi bi-reception-4'},
-    
+    {
+        name: 'Đánh Giá',
+        exact: true, 
+        to:'/danhgia',
+        iconClassName:'bi bi-chat-square-text-fill',
+        subMenus:[{name:"Chờ Duyệt", to: '/danhgia/choduyet'},
+        {name:"Hiển Thị", to: '/danhgia/hienthi'},
+        {name:'Ẩn', to: '/danhgia/an'}]
+    },
     {
         name: 'Trạng Thái Đơn',
         exact: true, 

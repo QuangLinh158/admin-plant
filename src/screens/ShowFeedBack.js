@@ -1,8 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrdersInitiate, getOrderInitiate, deleteOrderInitiate, reset } from '../redux/order-reducer/action';
-import { getDetailOrdersInitiate, getDetailOrderInitiate } from '../redux/detailOrder-reducer/action';
+import { getFeedbacksInitiate, getFeedbackInitiate, reset } from '../redux/feedBack-reducer/action';
 import { MDBBtn,
     MDBModal,
     MDBModalDialog,
@@ -13,46 +12,28 @@ import { MDBBtn,
     MDBModalFooter,
   } from 'mdb-react-ui-kit';
 import ReactPaginate from 'react-paginate';
-import moment from 'moment';
 import { Button } from '@material-ui/core';
-moment.locale('vi')
 
 const initialState = {
-    Promotion:0,
-    addressCus:"",
-    costShip:0,
-    date:"",
-    dateDelivery:"",
-    idCus:"",
-    idOrder:"",
-    nameCus:"",
-    payment:"",
-    phoneCus:"",
-    point:"",
-    quantity:0,
+    anhKhachHang:"",
+    idFeedback:"",
+    idKhachHang:"",
+    idProduct:"",
+    ngay:"",
+    noiDung:"",
     state:"",
-    statePayment:"",
-    totalPayment:0,
-    totalPrice:0
+    tenKhachHang:""
 }
 
-const UnconfirmInvoice = () => {
+const ShowFeedback = () => {
 
     const [state1, setState] = useState(initialState);
 
     const dispatch = useDispatch();
 
-    const {Promotion, addressCus, costShip, date, dateDelivery, idCus, idOrder, nameCus,
-        payment, phoneCus, point, quantity, state, statePayment, totalPayment, totalPrice} = state1;
+    const {anhKhachHang, idFeedback, idKhachHang, idProduct, ngay, noiDung, state, tenKhachHang} = state1;
 
-    const {Orders, Order} = useSelector(state1 =>state1.Orders);
-    const detailOrders = useSelector(state1 => state1.DetailOrders.DetailOrders);
-    
-    //filer detail order map filter 
-    function doSomeThing(id) {
-        let arr = detailOrders.filter(item => item.idOrder === id);
-        return arr;
-    }
+    const {Feedbacks, Feedback} = useSelector(state1 =>state1.Feedback);
 
     const [modalOpen, setModalOpen] = useState(false);
     const [pageNumber, setPageNumber] = useState(0);
@@ -62,7 +43,7 @@ const UnconfirmInvoice = () => {
         setSearchDis(event.target.value);
     };
 
-    let dataSearch = Orders.filter(item => {
+    let dataSearch = Feedbacks.filter(item => {
         return Object.keys(item).some(key =>
             item[key].toString().toLowerCase().includes(searchDis.toString().toLowerCase())
             );
@@ -72,22 +53,22 @@ const UnconfirmInvoice = () => {
     const pagesVisited = pageNumber * discountsPerPage;
    
 
-    const displayOrders = dataSearch.slice(pagesVisited, pagesVisited + discountsPerPage)
+    const displayFeedbacks = dataSearch.slice(pagesVisited, pagesVisited + discountsPerPage)
     .map((item,index) => {
-        if(item.state === "Chờ xác nhận"){
+        if(item.state === "Hiển thị"){
         return(
         <tbody  key={index} >
             <tr >
             <th scope="row">{index+1}</th>
-            <td>{item.idOrder}</td>
-            <td>{item.nameCus}</td>
-            <td>{item.date}</td>
-            <td><div style={{color:"red"}}>{item.state}</div></td>
+            <td>{item.tenKhachHang}</td>
+            <td>{item.noiDung}</td>
+            <td>{item.ngay}</td>
+            <td>{item.state}</td>
             <td>
-                <Link to={`/suahdcxn/${item.id}`}>
+                <Link to={`/suadanhgia/${item.id}`}>
                     <i className="bi bi-check-square-fill"
                     style={{color:'green'}}
-                    onClick= {() => editOrder(item.id)}
+                    onClick= {() => editFeedback(item.id)}
                     ></i>
                 </Link>
             </td>
@@ -102,66 +83,42 @@ const UnconfirmInvoice = () => {
         );}
     });
 
-    const pageCount = Math.ceil(Orders.length / discountsPerPage);
+    const pageCount = Math.ceil(Feedbacks.length / discountsPerPage);
     const changePage = ({selected}) =>{
         setPageNumber(selected);
     }
 
     useEffect(() => {
-        dispatch(getOrdersInitiate());
+        dispatch(getFeedbacksInitiate());
     }, []);
-    useEffect(() => {
-        dispatch(getDetailOrdersInitiate());
-    },[]);
 
     useEffect(() => {
-        if(Order){
-            setState({ ...Order});
+        if(Feedback){
+            setState({ ...Feedback});
         }
-     },[Order]);
+     },[Feedback]);
 
-    const editOrder = (id) => {
-        dispatch(getOrderInitiate(id));
+    const editFeedback = (id) => {
+        dispatch(getFeedbackInitiate(id));
     };
 
     const modalBody = (
         <div className="row">
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Mã đơn hàng:</div>
-            <div className="col-sm-7">{Order.idOrder}</div>
+            <div className="col-sm-12" ><img src={Feedback.anhKhachHang} width={50} height={50} style={{backgroundColor:"#74C69D", borderRadius:30}}/></div>
+            
+            <div className="col-sm-5" style={{fontWeight:'bold'}}>Tên khách hàng:</div>
+            <div className="col-sm-7">{Feedback.tenKhachHang}</div>
 
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Tên người nhận:</div>
-            <div className="col-sm-7">{Order.nameCus}</div>
+            <div className="col-sm-5" style={{fontWeight:'bold'}}>Ngày đánh giá:</div>
+            <div className="col-sm-7">{Feedback.ngay}</div>
 
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Số điện thoại:</div>
-            <div className="col-sm-7">{Order.phoneCus}</div>
+            <div className="col-sm-5" style={{fontWeight:'bold'}}>Nội dung:</div>
+            <div className="col-sm-7">{Feedback.noiDung}</div>
 
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Địa chỉ:</div>
-            <div className="col-sm-7">{Order.addressCus}</div>
-
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Số lượng:</div>
-            <div className="col-sm-7">{Order.quantity}</div>
-
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Phương thức thanh toán:</div>
-            <div className="col-sm-7">{Order.payment}</div>
-
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Điểm tích lũy:</div>
-            <div className="col-sm-7">{Order.point}</div>
-
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Trạng thái đơn:</div>
-            <div className="col-sm-7">{Order.state}</div>
-
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Trạng thái thanh toán:</div>
-            <div className="col-sm-7">{Order.statePayment}</div>
-
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Phí vận chuyển:</div>
-            <div className="col-sm-7">{Order.costShip} VND</div>
-
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Khuyến mãi:</div>
-            <div className="col-sm-7">{Order.Promotion}</div>
-
-            <div className="col-sm-5" style={{fontWeight:'bold'}}>Tổng tiền:</div>
-            <div className="col-sm-7">{Order.totalPayment} VND</div>
-            <div>
+            <div className="col-sm-5" style={{fontWeight:'bold'}}>Trạng thái:</div>
+            <div className="col-sm-7">{Feedback.state}</div>
+            
+            {/* <div>
             {
                 doSomeThing(Order.idOrder).map(item => (
                     <div className="row" style={{marginLeft:0,width:490}}>
@@ -171,13 +128,12 @@ const UnconfirmInvoice = () => {
                     </div>
                 ))
             }
-            </div>
-            {/* <button title='haha' onClick={() => doSomeThing(Order.idOrder)}/> */}
+            </div> */}
         </div>
     );
     const handleModal = (id) => {
         setModalOpen(true);
-        dispatch(getOrderInitiate(id));
+        dispatch(getFeedbackInitiate(id));
     };
     const handleCloseModal = () => {
         setModalOpen(false);
@@ -208,16 +164,16 @@ const UnconfirmInvoice = () => {
                 <thead className="thead-table">
                     <tr id="abc">
                         <th scope="col">STT</th>
-                        <th scope="col">Mã Hóa Đơn</th>
                         <th scope="col">Khách Hàng</th>
-                        <th scope="col">Ngày Thanh Toán</th>
+                        <th scope="col">Nội Dung</th>
+                        <th scope="col">Ngày</th>
                         <th scope="col">Tình Trạng</th>
                         <th></th>
                         <th></th>
 
                     </tr>
                 </thead>
-                    {displayOrders}
+                    {displayFeedbacks}
             </table>
             <ReactPaginate 
                     previousLabel={"Trước"}
@@ -259,4 +215,4 @@ const UnconfirmInvoice = () => {
         </div>
     )
 }
-export default UnconfirmInvoice;
+export default ShowFeedback;

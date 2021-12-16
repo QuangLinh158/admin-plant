@@ -98,8 +98,33 @@ const AddCate = () => {
 
             <div className="hr"></div>
 
-            <form onSubmit={handleSubmit} className="row" style={{marginTop:10,color:'green'}}>
-                <div className="col-md-12">
+            <form onSubmit={handleSubmit} className="row" style={{color:'green'}}>
+                <div className='col-md-12'>
+                    
+                    <label className="form-label">Hình ảnh</label>
+                        <div className='col-md-4'>
+                            <div className='img-frame'>
+                                <div className="input-group">
+                                    <br/>
+                                    {result && <img ref={imageRef} src={result} alt="" height={100} width={100}/>}
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div className="input-group" >
+                            <input
+                                type="file"
+                                defaultValue={state.imgLoai}
+                                onChange={(e) => {
+                                setImage(e.target.files[0]);
+                                uploader(e);
+
+                            }}
+                            name="ImageURL"
+                            />
+                        </div>
+                </div>
+                <div className="col-md-4">
                     <label  className="form-label">Mã loại</label>
                     <input
                         type="text"
@@ -109,7 +134,7 @@ const AddCate = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <label className="form-label">Tên loại</label>
                     <input
                         type="text"
@@ -119,39 +144,9 @@ const AddCate = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className='col-md-12'>
-                    <br/>
-                    <label className="form-label">Hình ảnh</label>
-                    <div className="input-group" >
-
-                        <input
-                            type="file"
-                            defaultValue={state.imgLoai}
-                            //value={state.ImageURL}
-                            onChange={(e) => {
-                                setImage(e.target.files[0]);
-                                uploader(e);
-
-                            }}
-                            name="ImageURL"
-                        />
-                    </div>
-
-                </div>
-                <div className='col-md-12'>
-                    <br/>
-                    <div className='img-frame'>
-                        <div className="input-group">
-                            <br/>
-                            {result && <img ref={imageRef} src={result} alt="" height={100} width={100}/>}
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className='col-md-12' >
-                    <label  className="form-label">Chọn</label>
-                    <button type="submit" className="btn btn-success btn-block">Tạo</button>
+                <div className='col-md-4'style={{marginTop:8}} >
+                    <label className="form-label"></label>
+                    <button  type="submit" className="btn btn-success btn-block">Tạo</button>
                 </div>
             </form>
         </div>
