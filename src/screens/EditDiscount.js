@@ -37,7 +37,7 @@ const EditDiscount = (props) => {
         setState({ ...state, [name]: value});
     };
 
-    const {discounts, discount} = useSelector((state) =>state.data);
+    const {discounts, discount} = useSelector((state) =>state.discounts);
     useEffect(() => {
         getItemID(props.location.pathname);
         if(discount){

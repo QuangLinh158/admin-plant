@@ -4,8 +4,6 @@ import { DateRangePickerComponent} from '@syncfusion/ej2-react-calendars';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { addDiscountInitiate} from '../redux/discount-reducer/actions';
-
-
 const initialState = {
     MaKhuyenMai:"",
     TenKhuyenMai:"",
@@ -57,7 +55,7 @@ const AddDiscount = () => {
             <div className="hr"></div>
             
             <form onSubmit={handleSubmit} className="row" style={{marginTop:10,color:'green'}}>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <label  className="form-label">Mã Khuyến Mãi</label>
                     <input 
                         type="text" 
@@ -67,7 +65,7 @@ const AddDiscount = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <label className="form-label">Tên Khuyến Mãi</label>
                     <input 
                         type="text" 
@@ -77,7 +75,7 @@ const AddDiscount = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <label  className="form-label">Khuyến Mãi Tối Đa</label>
                     <div className="input-group">
                         <input 
@@ -92,7 +90,7 @@ const AddDiscount = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                 <br/>
                     <label className="form-label">Chiết Khấu</label>
                     <div className="input-group">
@@ -108,7 +106,7 @@ const AddDiscount = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <br/>
                     <label className="form-label">Tình Trạng</label>
                     <div className="input-group">
@@ -128,7 +126,7 @@ const AddDiscount = () => {
                         </select>
                     </div>
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                 <br/>
                     <label className="form-label">Bắt đầu - Kết thúc</label>
                     <DateRangePickerComponent 
@@ -145,7 +143,7 @@ const AddDiscount = () => {
                     ></DateRangePickerComponent>
                 </div>
                
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <br/><br/>
                     <button type="submit" className="btn btn-success btn-block">Tạo</button>
                 </div>

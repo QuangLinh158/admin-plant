@@ -1,6 +1,8 @@
-import React,{useState,useEffect} from 'react';
-import { BrowserRouter as Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import React,{useState,useEffect, useRef} from 'react';
+import { Link } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { formatMs } from '@material-ui/core';
+import { invalid } from 'moment';
 
 
 const Login = ({history}) => {
@@ -8,6 +10,7 @@ const Login = ({history}) => {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ loading, setLoading ] = useState(false);
+    const emailRef= useRef();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -28,6 +31,22 @@ const Login = ({history}) => {
             .catch(e => alert(e.message))
             .finally(() => setLoading(false))
     }
+
+    const sendPass = (email) =>{
+      const auth = getAuth();
+      return sendPasswordResetEmail(auth, email);
+    }
+    const forgotPasswordHandler = () => {
+      // const email1 = emailRef.current.value;
+      if (email)
+        sendPass(email).then((email) => {
+          emailRef.current.value = "";
+        }).catch((err) => {
+          alert("Vui lòng kiểm tra email để thay đổi mật khẩu");
+        })
+      else if(!email)
+        alert("Email không tồn tại");
+    };
 
 
     return (
@@ -50,7 +69,7 @@ const Login = ({history}) => {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     name="email"
-                    type="email" 
+                    type="text" 
                     className="form-control" 
                     id="exampleInputEmail1" 
                     aria-describedby="emailHelp" 
@@ -74,7 +93,7 @@ const Login = ({history}) => {
                     <span className="slider round" />
                   </label>
                   <label className="form-check-label" htmlFor="exampleCheck1">Lưu</label>
-                  <label className="forgot-password">Quên mật khẩu?</label>
+                  <label className="forgot-password"  onClick={forgotPasswordHandler}>Quên mật khẩu?</label>
                   </div>
                   <br />
                   <button 
@@ -83,9 +102,9 @@ const Login = ({history}) => {
                   >
                       {loading ? '...' : 'Vào'}
                   </button>
-                  <Link to="/signup">
+                  {/* <Link to="/signup">
                         Đăng Ký
-                  </Link>
+                  </Link> */}
                   
                   {/* End Loging form */}
                 </div>

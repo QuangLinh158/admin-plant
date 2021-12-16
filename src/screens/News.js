@@ -159,21 +159,16 @@ const NewsScreen = () => {
                     <tr>
                         <th scope="col">STT</th>
                         <th scope="col">Mã</th>
-                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Hình</th>
                         <th scope="col">Tên</th>
                         <th scope="col">Nội dung</th>
-                        <th>Sữa</th>
-                        <th>Xóa</th>
-                        <th>Xem</th>
                         <th></th>
-
-
+                        <th></th>
+                        <th></th>
+                        
                     </tr>
                     </thead>
                     {displayNews}
-
-
-
 
                 </table>
                 <ReactPaginate

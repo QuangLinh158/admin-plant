@@ -102,7 +102,6 @@ const AddNewsScreen = () => {
 
     return (
         <div className="backgroundProduct" style={{background:"white", padding:20, marginTop:-25}}>
-            <h5>Tin Tức</h5>
             <div style={{background:'green',color:'white',width:250,display:'flex',
                 padding:3,borderTopLeftRadius:10,borderTopRightRadius:10}}>
                 <h4 style={{margin:'auto'}}>Thêm Tin Tức Mới</h4>
@@ -112,33 +111,17 @@ const AddNewsScreen = () => {
 
             <form onSubmit={handleSubmit} className="row" style={{marginTop:10,color:'green'}}>
                 <div className='col-md-12'>
-                    <label  className="form-label">Mã Tin Tức</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={MaTT}
-                        name="MaTT"
-                        onChange={handleInputChange}
-                    />
+                    <div className='img-frame'>
+                        <div className="input-group">
+                            <br/>
+                            {result && <img ref={imageRef} src={result} alt="" height={100} width={100}/>}
+                        </div>
+                    </div>
+
                 </div>
                 <div className='col-md-12'>
-                    <label className="form-label">Tên TT</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={TenTT}
-                        name="TenTT"
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-
-
-                <div className='col-md-12'>
-                    <br/>
                     <label className="form-label">Hình ảnh</label>
                     <div className="input-group" >
-
                         <input
                             type="file"
                             defaultValue={state.ImageTTURL}
@@ -151,20 +134,31 @@ const AddNewsScreen = () => {
                             name="ImageURL"
                         />
                     </div>
-
                 </div>
-                <div className='col-md-12'>
-                    <br/>
-                    <div className='img-frame'>
-                        <div className="input-group">
-                            <br/>
-                            {result && <img ref={imageRef} src={result} alt="" height={100} width={100}/>}
-                        </div>
-                    </div>
+                
 
+                <div className='col-md-4'>
+                    <label  className="form-label">Mã Tin Tức</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={MaTT}
+                        name="MaTT"
+                        onChange={handleInputChange}
+                    />
                 </div>
-                <div className='col-md-12'>
-                    <br/>
+                <div className='col-md-4'>
+                    <label className="form-label">Tên TT</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={TenTT}
+                        name="TenTT"
+                        onChange={handleInputChange}
+                    />
+                </div>
+                
+                <div className='col-md-4'>
                     <label className="form-label">Nội dung</label>
                     <div className="input-group">
                         <input
@@ -178,7 +172,7 @@ const AddNewsScreen = () => {
 
                 </div>
 
-                <div className='col-md-12'>
+                <div className='col-md-4'>
                     <br/><br/>
                     <button type="submit" className="btn btn-success btn-block">Tạo</button>
                 </div>

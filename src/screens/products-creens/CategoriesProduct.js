@@ -55,9 +55,9 @@ const CateScreen = () => {
                 <tbody key={index} >
                 <tr >
                     <th scope="row">{index+1}</th>
+                    <td><img src={item.imgLoai} height={50} width={50}/></td>
                     <td>{item.MaLoai}</td>
                     <td>{item.TenLoai}</td>
-                    <td><img src={item.imgLoai} height={50} width={50}/></td>
 
                     <td>
                         <Link to={`/sualoai/${item.id}`}>
@@ -144,12 +144,12 @@ const CateScreen = () => {
                     <thead className="thead-table">
                     <tr>
                         <th scope="col">STT</th>
+                        <th scope="col">Hình ảnh</th>
                         <th scope="col">Mã loại</th>
                         <th scope="col">Tên loại</th>
-                        <th scope="col">Hình ảnh</th>
-                        <th scope="col">Sữa</th>
-                        <th scope="col">Xóa</th>
-                        <th scope="col">Xem</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
 
                     </tr>
                     </thead>

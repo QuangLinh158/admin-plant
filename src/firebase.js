@@ -3,6 +3,7 @@ import "firebase/compat/firestore";
 import "firebase/compat/storage"
 
 export const firebaseConfig = {
+
     apiKey : "AIzaSyCcJB_3XDq_kytR0-f3hboOYRCY4bK0y20" ,
     authDomain : "appplants-fbbf8.firebaseapp.com" ,
     projectId : "appplants-fbbf8" ,

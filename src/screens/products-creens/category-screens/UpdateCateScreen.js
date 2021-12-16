@@ -57,7 +57,7 @@ const UpdateCateScreen = (props) => {
             <div className="hr"></div>
 
             <form onSubmit={handleSubmit} className="row" style={{marginTop:20,color:'green'}}>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <label  className="form-label">Mã loại</label>
                     <input
                         type="text"
@@ -67,7 +67,7 @@ const UpdateCateScreen = (props) => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-4">
                     <label className="form-label">Tên Loại</label>
                     <input
                         type="text"
@@ -78,8 +78,8 @@ const UpdateCateScreen = (props) => {
                     />
                 </div>
 
-                <div className="col-md-12">
-                    <br/><br/>
+                <div className="col-md-4" style={{marginTop:8}}>
+                    <br/>
                     <button type="submit" className="btn btn-success btn-block">Cập nhật</button>
                 </div>
 

@@ -46,6 +46,7 @@ const Discount = () => {
 
     const discountsPerPage = 9;
     const pagesVisited = pageNumber * discountsPerPage;
+    
     const displayDiscounts = dataSearch.slice(pagesVisited, pagesVisited + discountsPerPage)
     .map((item,index) => {
     return(
