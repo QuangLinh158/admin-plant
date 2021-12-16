@@ -26,7 +26,7 @@ const initialState = {
 }
 
 const Discount = () => {
-
+    
     const [state, setState] = useState(initialState);
     const dispatch = useDispatch();
     const {MaKhuyenMai, TenKhuyenMai, KhuyenMaiToiDa, ChietKhau, TinhTrangKhuyenMai, NgayKhuyenMai} = state;
