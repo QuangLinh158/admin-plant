@@ -190,11 +190,12 @@ const UpdateProductScreen = (props) => {
                     <label className="form-label">Giá nhập</label>
                     <div className="input-group">
                         <input
-                            type='text'
+                            type="number"
                             className="form-control"
                             value={GiaNhapSp}
                             name="GiaNhapSp"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
@@ -206,11 +207,12 @@ const UpdateProductScreen = (props) => {
                     <label className="form-label">Giá bán</label>
                     <div className="input-group">
                         <input
-                            type='text'
+                            type="number"
                             className="form-control"
                             value={GiaSp}
                             name="GiaSp"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
@@ -246,6 +248,7 @@ const UpdateProductScreen = (props) => {
                             value={SoluongSp}
                             name="SoluongSp"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>Sản phẩm</span>

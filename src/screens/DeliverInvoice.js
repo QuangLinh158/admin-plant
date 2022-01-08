@@ -90,6 +90,7 @@ const DeliverInvoice = () => {
             <td>
                 <i className="bi bi-trash-fill" 
                 style={{color:'red'}}
+                onClick={() => deleteOder(item.id)}
                 ></i>
                 </td>
             </tr>
@@ -114,6 +115,11 @@ const DeliverInvoice = () => {
 
     const editOrder = (id) => {
         dispatch(getOrderInitiate(id));
+    };
+    const deleteOder = (id) => {
+        if(window.confirm("Bạn muốn xóa hóa đơn này không ?")){
+            dispatch(deleteOrderInitiate(id));
+        }
     };
 
     const modalBody = (

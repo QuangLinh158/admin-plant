@@ -81,12 +81,12 @@ const AddProductScreen = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // if(!MaSp || !TenSp|| !TenLoai || !GiaSp || !ImageURL || !MoTaChiTiet||!SoluongSp || !TinhTrang){
-        //     setErrorMsg(alert("Please enter all info"));
-        // }
-        // else
-        // {
-        //setState({MaSp:"", TenSp:"", MaLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
+        if(!MaSp || !TenSp|| !TenLoai || !GiaSp || !ImageURL || !MoTaChiTiet||!SoluongSp || !TinhTrang){
+            setErrorMsg(alert("Vui lòng điền đầy đủ thông tin"));
+        }
+        else
+        {
+            // setState({MaSp:"", TenSp:"", MaLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
 
         const uploadTask = storage.storage.ref(`/images/${image.name}`).put(image)
 
@@ -112,7 +112,7 @@ const AddProductScreen = () => {
 
         }
 
-    };
+    };}
 
     const _onCategoriesChange = (name) => {
         setSelectedCategory(name)
@@ -122,7 +122,7 @@ const AddProductScreen = () => {
         <div className="backgroundDiscount" style={{background:"white", padding:20, marginTop:-25}}>
             <div style={{background:'green',color:'white',width:250,display:'flex',
                 padding:3,borderTopLeftRadius:10,borderTopRightRadius:10}}>
-                <h4 style={{margin:'auto'}}>Thêm sản phẩm mới</h4>
+                <h4 style={{margin:'auto'}}>Thêm sản phẩm</h4>
             </div>
 
             <div className="hr"></div>
@@ -201,11 +201,12 @@ const AddProductScreen = () => {
                     <label className="form-label">Giá nhập</label>
                     <div className="input-group">
                         <input
-                            type='text'
+                            type="number"
                             className="form-control"
                             value={GiaNhapSp}
                             name="GiaNhapSp"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
@@ -217,11 +218,12 @@ const AddProductScreen = () => {
                     <label className="form-label">Giá sản phẩm</label>
                     <div className="input-group">
                         <input
-                            type='text'
+                            type="number"
                             className="form-control"
                             value={GiaSp}
                             name="GiaSp"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
@@ -254,6 +256,7 @@ const AddProductScreen = () => {
                             value={SoluongSp}
                             name="SoluongSp"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>Sản phẩm</span>

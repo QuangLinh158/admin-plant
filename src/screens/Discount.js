@@ -139,13 +139,17 @@ const Discount = () => {
                 <Link to="/themkm">
                     <button type="button" className="btn btn-success" style={{marginLeft:15, height:37,background:'green'}}><i className="bi bi-plus-circle"></i></button>
                 </Link>
+                
                 <div className="input-group" style={{width:300, height:30, marginLeft:15}}>
-                    <input type="text" 
-                        className="form-control" 
-                        placeholder="Tìm Kiếm ..."
-                        value = {searchDis}
-                        onChange = {searchText.bind(this)}
+                    <input type="text"
+                           className="form-control"
+                           placeholder="Tìm Kiếm ..."
+                           value = {searchDis}
+                           onChange = {searchText.bind(this)}
                     />
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-secondary" type="button" id="button-addon2" style={{background:'green',color:'white'}}><i className="bi bi-search"></i></button>
+                    </div>
                 </div>
             </div>
 
