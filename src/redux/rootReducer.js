@@ -6,6 +6,7 @@ import newsReducer from "./news-reducer/reducer";
 import orderReducer from "./order-reducer/reducer";
 import detailOrdersReducer from "./detailOrder-reducer/reducer";
 import feedBackReducer from "./feedBack-reducer/reducer";
+import staReducer from "./statistic-reducer/reducer";
 
 
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     news:newsReducer,
     Orders:orderReducer,
     DetailOrders:detailOrdersReducer,
-    Feedback:feedBackReducer
+    Feedback:feedBackReducer,
+    stas:staReducer
 });
 
 export default rootReducer;

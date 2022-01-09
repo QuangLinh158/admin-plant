@@ -47,6 +47,7 @@ import UpdateProductScreen from "../screens/products-creens/product-screens/Upda
 import Login from "../screens/Login";
 import AddNewsScreen from "../screens/news-screens/AddNewsScreen";
 import NewsScreen from "../screens/News";
+import UpdateNewScreen from "../screens/news-screens/UpdateNews";
 
 const Dashboard = ({history}) => {
 
@@ -120,6 +121,8 @@ const user = auth.currentUser;
 
                 <Route path="/tintuc" component={NewsScreen} />
                 <Route path="/themtt" component={AddNewsScreen} />
+                <Route path="/suatt/:id" component={UpdateNewScreen} />
+
 
                 <Route path='/trangthaidon/cxn' component={UnconfirmInvoice}/>
                 <Route path="/suahdcxn/:id" component={EditUnconfirmVoice}/>

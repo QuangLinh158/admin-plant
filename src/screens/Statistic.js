@@ -1,9 +1,13 @@
 import React from 'react'
+import DeliverInvoice from "./DeliverInvoice";
+import DeliveredInvoiceScr from "./statistic-screen/DeliveredInVoiced";
+import MonthInvoice from "./statistic-screen/MonthInvoice";
+import ProductStScreen from "./statistic-screen/Productstatistic";
 
 export default function Statistic() {
     return (
         <div>
-            <h1>Thống kê nè</h1>
+<ProductStScreen/>
         </div>
     )
 }

@@ -282,4 +282,9 @@ body{
     color: white;
     background-color: green;
 }
-
+.tongtien{
+    float: left;
+}
+#liner{
+    border: 1px solid green;
+}

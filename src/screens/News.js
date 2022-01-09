@@ -13,7 +13,12 @@ import {
     MDBModalHeader,
     MDBModalTitle
 } from "mdb-react-ui-kit";
-import {deleteNewsInitiate, getNewsListInitiate, getOneNewsInitiate} from "../redux/news-reducer/action";
+import {
+    deleteNewsInitiate,
+    getNewsListInitiate,
+    getOneNewsInitiate,
+    updateNewsInitiate
+} from "../redux/news-reducer/action";
 
 const initialState = {
     MaTT: "",
@@ -61,7 +66,7 @@ const NewsScreen = () => {
                         <Link to={`/suatt/${item.id}`}>
                             <i className="bi bi-pencil-square"
                                style={{color:'green'}}
-                               onClick= {() => {}}
+                               onClick= {() => {updateNews(item.id)}}
                             ></i>
                         </Link>
                     </td>
@@ -100,9 +105,9 @@ const NewsScreen = () => {
             dispatch(deleteNewsInitiate(id));
         }
     };
-    // const updateProduct= (id) => {
-    //     dispatch(getOneProductInitiate(id));
-    // };
+    const updateNews= (id) => {
+        dispatch(getOneNewsInitiate(id));
+    };
 
     const modalBody = (
         <div className="row">
