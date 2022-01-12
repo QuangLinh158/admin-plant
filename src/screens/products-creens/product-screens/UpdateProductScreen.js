@@ -88,22 +88,22 @@ const UpdateProductScreen = (props) => {
         }
         else
         {
-            const uploadTask = storage.storage.ref(`/images/${image.name}`).put(image)
-
-            uploadTask.on('state_changed',
-                (snapshoty) => {
-                    console.log(snapshoty)
-                }, (err) => {
-                    console.log(e)
-                }, () => {
-                    storage.storage.ref('images').child(image.name).getDownloadURL()
-                        .then(url => {
-                            return url;
-                        })
-                        .then((url) => {
-                            setState({...state,ImageURL: url})
-                        })
-                })
+            // const uploadTask = storage.storage.ref(`/images/${image.name}`).put(image)
+            //
+            // uploadTask.on('state_changed',
+            //     (snapshoty) => {
+            //         console.log(snapshoty)
+            //     }, (err) => {
+            //         console.log(e)
+            //     }, () => {
+            //         storage.storage.ref('images').child(image.name).getDownloadURL()
+            //             .then(url => {
+            //                 return url;
+            //             })
+            //             .then((url) => {
+            //                 setState({...state,ImageURL: url})
+            //             })
+            //     })
             dispatch(updateProductInitiate(id,state));
             setState({MaSp:"", TenSp:"", TenLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
 
@@ -190,11 +190,12 @@ const UpdateProductScreen = (props) => {
                     <label className="form-label">Giá nhập</label>
                     <div className="input-group">
                         <input
-                            type='text'
+                            type="number"
                             className="form-control"
                             value={GiaNhapSp}
                             name="GiaNhapSp"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
@@ -206,11 +207,12 @@ const UpdateProductScreen = (props) => {
                     <label className="form-label">Giá bán</label>
                     <div className="input-group">
                         <input
-                            type='text'
+                            type="number"
                             className="form-control"
                             value={GiaSp}
                             name="GiaSp"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>VND</span>
@@ -246,6 +248,7 @@ const UpdateProductScreen = (props) => {
                             value={SoluongSp}
                             name="SoluongSp"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>Sản phẩm</span>

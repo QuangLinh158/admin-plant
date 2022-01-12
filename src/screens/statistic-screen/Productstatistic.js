@@ -14,6 +14,7 @@ import {
     MDBModalTitle
 } from "mdb-react-ui-kit";
 import {getSTAInitiatee} from "../../redux/statistic-reducer/action";
+import {ExportCSV} from "../export-file/ExportCSV";
 
 const initialState = {
     MaSp:"",
@@ -182,15 +183,12 @@ const ProductStScreen = () => {
                                 <div className="col-sm-12">Tổng vốn: {format2(tongVon,'VND')}</div>
                                 <div className="col-sm-12">Tổng lợi nhuận: {format2(loiNhuanTong,'VND')}</div>
                             </div>
+                            <div>
+                                <ExportCSV csvData={product_list} fileName="thongkedoanhthu"/>
+                            </div>
 
                         </td>
                         <td>
-
-                                <button type="submit" className="btn btn-success btn-block">Lưu</button>
-                                <button type="submit" className="btn btn-success btn-block">Xuất excel</button>
-                                <button type="submit" className="btn btn-success btn-block">Xuất pdf</button>
-
-
                         </td>
                     </tr>
 

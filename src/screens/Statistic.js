@@ -7,7 +7,7 @@ import ProductStScreen from "./statistic-screen/Productstatistic";
 export default function Statistic() {
     return (
         <div>
-<ProductStScreen/>
+             <ProductStScreen/>
         </div>
     )
 }

@@ -69,34 +69,34 @@ const UpdateNewScreen = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let id = getItemById(props.location.pathname);
-        if(!MaTT||!ImageTTURL||!TenTT||!NoiDungTT ){
-           // setErrorMsg(alert("Vui lòng điền đầy đủ thông tin."));
-        }
-        else
-        {
-            const uploadTask = storage.storage.ref(`/images_news/${image.name}`).put(image)
-
-            uploadTask.on('state_changed',
-                (snapshoty) => {
-                    console.log(snapshoty)
-                }, (err) => {
-                    console.log(e)
-                }, () => {
-                    storage.storage.ref('images_news').child(image.name).getDownloadURL()
-                        .then(url => {
-                            return url;
-                        })
-                        .then((url) => {
-                            setState({...state,ImageTTURL: url})
-                        })
-                })
+        // if(!MaTT||!ImageTTURL||!TenTT||!NoiDungTT ){
+        //    // setErrorMsg(alert("Vui lòng điền đầy đủ thông tin."));
+        // }
+        // else
+        // {
+        //      const uploadTask = storage.storage.ref(`/images_news/${image.name}`).put(image)
+        //
+        //     uploadTask.on('state_changed',
+        //         (snapshoty) => {
+        //             console.log(snapshoty)
+        //         }, (err) => {
+        //             console.log(e)
+        //         }, () => {
+        //             storage.storage.ref('images_news').child(image.name).getDownloadURL()
+        //                 .then(url => {
+        //                     return url;
+        //                 })
+        //                 .then((url) => {
+        //                     setState({...state,ImageTTURL: url})
+        //                 })
+        //         })
             dispatch(updateNewsInitiate(id,state));
             //setState({MaSp:"", TenSp:"", TenLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
 
-            window.alert("Bạn cập nhật thành công!");
+            //window.alert("Bạn cập nhật thành công!");
             history.push('/tintuc');
 
-        }
+
     };
     return (
         <div className="backgroundDiscount" style={{background:"white", padding:20, marginTop:-25}}>

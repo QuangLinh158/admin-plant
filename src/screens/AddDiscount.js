@@ -84,6 +84,7 @@ const AddDiscount = () => {
                             value={KhuyenMaiToiDa}
                             name="KhuyenMaiToiDa"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>vnd</span>
@@ -100,6 +101,7 @@ const AddDiscount = () => {
                             value={ChietKhau}
                             name="ChietKhau"
                             onChange={handleInputChange}
+                            min={0}
                         />
                         <div className="input-group-append">
                             <span className="input-group-text" style={{background:'green',color:'white'}}>%</span>

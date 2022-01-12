@@ -57,7 +57,7 @@ const AddCate = () => {
     const handleSubmit = (e) => {
          e.preventDefault();
         // if(!MaLoai|| !TenLoai||!imgLoai){
-        //     setErrorMsg(alert("Please enter all info"));
+        //     setErrorMsg(alert("Vui lòng điền đầy đủ thông tin"));
         // }
         // else
         // {
@@ -91,7 +91,7 @@ const AddCate = () => {
 
     return (
         <div className="backgroundDiscount" style={{background:"white", padding:20, marginTop:-25}}>
-            <div style={{background:'green',color:'white',width:250,display:'flex',
+            <div style={{background:'green',color:'white',width:300,display:'flex',
                 padding:3,borderTopLeftRadius:10,borderTopRightRadius:10}}>
                 <h4 style={{margin:'auto'}}>Thêm loại sản phẩm</h4>
             </div>

@@ -37,15 +37,15 @@ const UpdateCateScreen = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let id = getItemById(props.location.pathname);
-        if(!MaLoai || !TenLoai ){
-            setErrorMsg(alert("Vui lòng điền đầy đủ thông tin."));
-        }
-        else
-        {
+        // if(!MaLoai || !TenLoai ){
+        //     setErrorMsg(alert("Vui lòng điền đầy đủ thông tin."));
+        // }
+        // else
+        // {
             dispatch(updateCateInitiate(id,state));
             setState({MaLoai:"", TenLoai:""});
             history.push('/loaisanpham');
-        }
+        // }
     };
     return (
         <div className="backgroundDiscount" style={{background:"white", padding:20, marginTop:-25}}>

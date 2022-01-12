@@ -63,8 +63,8 @@ const AddNewsScreen = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // if(!MaSp || !TenSp|| !TenLoai || !GiaSp || !ImageURL || !MoTaChiTiet||!SoluongSp || !TinhTrang){
-        //     setErrorMsg(alert("Please enter all info"));
+        // if(!MaTT || !TenTT || !NoiDungTT || !ImageTTURL ){
+        //     setErrorMsg(alert("Vui lòng điền đầy đủ thông tin"));
         // }
         // else
         // {
@@ -110,7 +110,10 @@ const AddNewsScreen = () => {
             <div className="hr"></div>
 
             <form onSubmit={handleSubmit} className="row" style={{marginTop:10,color:'green'}}>
+                
                 <div className='col-md-12'>
+                    <label className="form-label">Hình ảnh</label>
+                    <div className='col-md-4'>
                     <div className='img-frame'>
                         <div className="input-group">
                             <br/>
@@ -119,8 +122,6 @@ const AddNewsScreen = () => {
                     </div>
 
                 </div>
-                <div className='col-md-12'>
-                    <label className="form-label">Hình ảnh</label>
                     <div className="input-group" >
                         <input
                             type="file"
@@ -137,7 +138,7 @@ const AddNewsScreen = () => {
                 </div>
                 
 
-                <div className='col-md-4'>
+                <div className='col-md-5'>
                     <label  className="form-label">Mã Tin Tức</label>
                     <input
                         type="text"
@@ -147,8 +148,8 @@ const AddNewsScreen = () => {
                         onChange={handleInputChange}
                     />
                 </div>
-                <div className='col-md-4'>
-                    <label className="form-label">Tên TT</label>
+                <div className='col-md-5'>
+                    <label className="form-label">Tên tin tức</label>
                     <input
                         type="text"
                         className="form-control"
@@ -158,9 +159,8 @@ const AddNewsScreen = () => {
                     />
                 </div>
                 
-                <div className='col-md-4'>
+                <div className='col-md-5'>
                     <label className="form-label">Nội dung</label>
-                    <div className="input-group">
                         <input
                             type="text"
                             className="form-control"
@@ -168,12 +168,11 @@ const AddNewsScreen = () => {
                             name="NoiDungTT"
                             onChange={handleInputChange}
                         />
-                    </div>
 
                 </div>
 
-                <div className='col-md-4'>
-                    <br/><br/>
+                <div className='col-md-5'>
+                    <br/>
                     <button type="submit" className="btn btn-success btn-block">Tạo</button>
                 </div>
 

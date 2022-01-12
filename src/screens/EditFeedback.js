@@ -63,7 +63,7 @@ const EditFeedback = (props) => {
         <div className="backgroundDiscount" style={{background:"white", padding:20, marginTop:-25}}>
             <div style={{background:'green',color:'white',width:400,display:'flex',
                 padding:3,borderTopLeftRadius:10,borderTopRightRadius:10}}>
-                <h5 style={{margin:'auto'}}>Cập Nhật Trạng Thái Đơn Hàng</h5>
+                <h5 style={{margin:'auto'}}>Cập Nhật Trạng Thái Đánh Giá</h5>
             </div>
 
             <div className="hr"></div>
