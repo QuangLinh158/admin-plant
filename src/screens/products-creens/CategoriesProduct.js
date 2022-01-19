@@ -174,7 +174,7 @@ const CateScreen = () => {
                     <MDBModalDialog>
                         <MDBModalContent>
                             <MDBModalHeader style={{background:'green'}}>
-                                <MDBModalTitle style={{color:'white',alignContent:'center'}}>THÔNG TIN SẢN PHẨM</MDBModalTitle>
+                                <MDBModalTitle style={{color:'white',alignContent:'center'}}>THÔNG TIN LOẠI</MDBModalTitle>
                                 <MDBBtn
                                     color='yellow'
                                     onClick={handleCloseModal}

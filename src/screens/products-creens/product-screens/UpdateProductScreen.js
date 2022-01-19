@@ -88,22 +88,22 @@ const UpdateProductScreen = (props) => {
         }
         else
         {
-            const uploadTask = storage.storage.ref(`/images/${image.name}`).put(image)
-
-            uploadTask.on('state_changed',
-                (snapshoty) => {
-                    console.log(snapshoty)
-                }, (err) => {
-                    console.log(e)
-                }, () => {
-                    storage.storage.ref('images').child(image.name).getDownloadURL()
-                        .then(url => {
-                            return url;
-                        })
-                        .then((url) => {
-                            setState({...state,ImageURL: url})
-                        })
-                })
+            // const uploadTask = storage.storage.ref(`/images/${image.name}`).put(image)
+            //
+            // uploadTask.on('state_changed',
+            //     (snapshoty) => {
+            //         console.log(snapshoty)
+            //     }, (err) => {
+            //         console.log(e)
+            //     }, () => {
+            //         storage.storage.ref('images').child(image.name).getDownloadURL()
+            //             .then(url => {
+            //                 return url;
+            //             })
+            //             .then((url) => {
+            //                 setState({...state,ImageURL: url})
+            //             })
+            //     })
             dispatch(updateProductInitiate(id,state));
             setState({MaSp:"", TenSp:"", TenLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
 

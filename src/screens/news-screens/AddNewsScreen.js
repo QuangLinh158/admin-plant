@@ -63,11 +63,11 @@ const AddNewsScreen = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(!MaTT || !TenTT || !NoiDungTT || !ImageTTURL ){
-            setErrorMsg(alert("Vui lòng điền đầy đủ thông tin"));
-        }
-        else
-        {
+        // if(!MaTT || !TenTT || !NoiDungTT || !ImageTTURL ){
+        //     setErrorMsg(alert("Vui lòng điền đầy đủ thông tin"));
+        // }
+        // else
+        // {
         //setState({MaSp:"", TenSp:"", MaLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
 
         const uploadTask = storage.storage.ref(`/images_news/${image.name}`).put(image)
@@ -96,7 +96,7 @@ const AddNewsScreen = () => {
 
         }
 
-    };}
+    };
 
 
 

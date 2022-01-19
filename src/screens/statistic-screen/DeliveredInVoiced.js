@@ -1,8 +1,10 @@
 import React,{useEffect,useState} from 'react';
-import { Link } from 'react-router-dom';
+//import {Select} from "@material-ui/core";
+//import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrdersInitiate, getOrderInitiate, deleteOrderInitiate, reset } from '../redux/order-reducer/action';
-import { getDetailOrdersInitiate, getDetailOrderInitiate } from '../redux/detailOrder-reducer/action';
+import Select from 'react-select'
+import { getOrdersInitiate, getOrderInitiate, deleteOrderInitiate, reset } from '../../redux/order-reducer/action';
+//import { getDetailOrdersInitiate, getDetailOrderInitiate } from '../../redux/detailOrder-reducer/action';
 import { MDBBtn,
     MDBModal,
     MDBModalDialog,
@@ -11,13 +13,11 @@ import { MDBBtn,
     MDBModalTitle,
     MDBModalBody,
     MDBModalFooter,
-  } from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
 import ReactPaginate from 'react-paginate';
 import moment from 'moment';
-import html2canvas from "html2canvas";
-import jsPDF from 'jspdf';
-import {ExportReactCSV} from "./export-file/ExportReactCSV";
-import {ExportCSV} from "./export-file/ExportCSV";
+import {monthsShort} from "moment/moment";
+//import {float} from "html2canvas/dist/types/css/property-descriptors/float";
 moment.locale('vi')
 
 const initialState = {
@@ -38,9 +38,16 @@ const initialState = {
     totalPayment:0,
     totalPrice:0
 }
+function format2(n, currency) {
+    return  n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+' '+currency;
+}
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+]
 
-
-const UnconfirmInvoice = () => {
+const DeliveredInvoiceScr = () => {
 
     const [state1, setState] = useState(initialState);
     const dispatch = useDispatch();
@@ -49,10 +56,10 @@ const UnconfirmInvoice = () => {
 
     const {Orders, Order} = useSelector(state1 =>state1.Orders);
     const detailOrders = useSelector(state1 => state1.DetailOrders.DetailOrders);
-    //filer detail order map filter 
+    //filer detail order map filter
     function doSomeThing(id) {
-    let arr = detailOrders.filter(item => item.idOrder === id);
-    return arr;
+        let arr = detailOrders.filter(item => item.idOrder === id);
+        return arr;
     }
 
     const [modalOpen, setModalOpen] = useState(false);
@@ -66,45 +73,42 @@ const UnconfirmInvoice = () => {
     let dataSearch = Orders.filter(item => {
         return Object.keys(item).some(key =>
             item[key].toString().toLowerCase().includes(searchDis.toString().toLowerCase())
-            );
+        );
     });
-
-
-
     const discountsPerPage = 99;
     const pagesVisited = pageNumber * discountsPerPage;
-   
 
+    let sumAll=0;
     const displayOrders = dataSearch.slice(pagesVisited, pagesVisited + discountsPerPage)
-    .map((item,index) => {
-        if(item.state === "Đã xác nhận"){
-        return(
-        <tbody  key={index} >
-            <tr >
-            <th scope="row">{index}</th>
-            <td>{item.idOrder}</td>
-            <td>{item.nameCus}</td>
-            <td>{item.date}</td>
-            <td>{item.dateDelivery}</td>
-            <td>{item.state}</td>
-            <td>
-                <Link to={`/suahdxn/${item.id}`}>
-                <i className="bi bi-cart-check-fill"
-                style={{color:'green'}}
-                onClick={() => editOrder(item.id)}
-                ></i>
-                </Link>
-            </td>
-            <td>
-                <i className="bi bi-eye-fill" 
-                style={{color:'blue'}}
-                onClick= {() => handleModal(item.id)}
-                ></i>
-                </td>
-            </tr>
-        </tbody>
-        );}
-    });
+        .map((item,index) => {
+            if(item.state === "Thành công"&&monthsShort(item.date,11)==="Dec"){
+                sumAll=sumAll+Number(item.totalPayment);
+                return(
+                    <tbody  key={index} >
+                    <tr >
+                        <th scope="row">{index}</th>
+                        <td>{item.idOrder}</td>
+                        <td>{item.nameCus}</td>
+                        <td>{item.date}</td>
+                        <td>{item.totalPayment}</td>
+                        <td>{item.state}</td>
+                        <td>
+                            <i className="bi bi-eye-fill"
+                               style={{color:'blue'}}
+                               onClick= {() => handleModal(item.id)}
+                            ></i>
+                        </td>
+                        <td>
+                            <i className="bi bi-trash-fill"
+                               style={{color:'red'}}
+                            ></i>
+                        </td>
+                    </tr>
+
+                    </tbody>
+
+                );}
+        });
 
     const pageCount = Math.ceil(Orders.length / discountsPerPage);
     const changePage = ({selected}) =>{
@@ -119,7 +123,7 @@ const UnconfirmInvoice = () => {
         if(Order){
             setState({ ...Order});
         }
-     },[Order]);
+    },[Order]);
 
     const editOrder = (id) => {
         dispatch(getOrderInitiate(id));
@@ -163,17 +167,18 @@ const UnconfirmInvoice = () => {
             <div className="col-sm-5" style={{fontWeight:'bold'}}>Tổng tiền:</div>
             <div className="col-sm-7">{Order.totalPayment} VND</div>
             <div>
-            {
-                doSomeThing(Order.idOrder).map(item => (
-                    <div className="row" style={{marginLeft:0,width:490}}>
-                        <div className="col-sm-5" ><img src={item.imagePro} width={50} height={50} style={{backgroundColor:"#74C69D", borderRadius:30}}/></div>
-                        <div className="col-sm-5" >{item.namePro}</div>
-                        <div className="col-sm-2" >{item.quantity}</div>
-                    </div>
-                ))
-            }
+                {
+                    doSomeThing(Order.idOrder).map(item => (
+                        <div className="row" style={{marginLeft:0,width:490}}>
+                            <div className="col-sm-5" ><img src={item.imagePro} width={50} height={50} style={{backgroundColor:"#74C69D", borderRadius:30}}/></div>
+                            <div className="col-sm-5" >{item.namePro}</div>
+                            <div className="col-sm-2" >{item.quantity}</div>
+                        </div>
+                    ))
+                }
             </div>
             {/* <button title='haha' onClick={() => doSomeThing(Order.idOrder)}/> */}
+
         </div>
     );
     const handleModal = (id) => {
@@ -185,17 +190,19 @@ const UnconfirmInvoice = () => {
         dispatch(reset());
     };
 
-
     return (
         <div className="backgroundUser" style={{background:'white', padding:20, marginTop:-38}}>
+            <h3>Thống kê</h3>
             <div className="row mb-2" >
+
                 <div className="input-group" style={{width:300, height:30, marginLeft:15}}>
-                    <input type="text" 
-                        className="form-control" 
-                        placeholder="Tìm Kiếm ..."
-                        value = {searchDis}
-                        onChange = {searchText.bind(this)}
-                        />
+                    <input type="text"
+                           className="form-control"
+                           placeholder="Tìm Kiếm ..."
+                           value = {searchDis}
+                           onChange = {searchText.bind(this)}
+                    />
+
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary" type="button" id="button-addon2" style={{background:'green',color:'white'}}><i className="bi bi-search"></i></button>
                     </div>
@@ -204,24 +211,39 @@ const UnconfirmInvoice = () => {
             <div className="hr" style={{marginTop:15}}></div>
             <br/>
             <div>
-            <table className="table table-hover">
-                <thead className="thead-table">
+                <table className="table table-hover">
+                    <thead className="thead-table">
                     <tr id="abc">
                         <th scope="col">STT</th>
                         <th scope="col">Mã Hóa Đơn</th>
                         <th scope="col">Khách Hàng</th>
                         <th scope="col">Ngày Thanh Toán</th>
-                        <th scope="col">Dự Kiến Giao Hàng</th>
+                        <th scope="col">Tổng Tiền</th>
                         <th scope="col">Tình Trạng</th>
                         <th></th>
                         <th></th>
                     </tr>
-                </thead>
+
+                    </thead>
                     {displayOrders}
-            </table>
 
-
-            <ReactPaginate 
+                </table>
+                <hr id="liner"/>
+                <div id="dthu" >
+                    Doanh thu tháng:
+                    <select className="form-select" aria-label="Default select example"  >
+                        <option selected>Open this select menu</option>
+                        <option value="1">Tháng 1 </option>
+                        <option value="2">Tháng 2</option>
+                        <option value="3">Tháng 3</option>
+                    </select>
+                </div>
+                <div class="tongtien" >
+                    <div className="col-sm-12">Tháng: 12</div>
+                    <div className="col-sm-12">Quý: 4</div>
+                    <div className="col-sm-12">Tổng doanh thu: {format2(sumAll,'VND')}</div>
+                </div>
+                <ReactPaginate
                     previousLabel={"Trước"}
                     nextLabel={"Sau"}
                     pageCount={pageCount}
@@ -231,36 +253,37 @@ const UnconfirmInvoice = () => {
                     nextLinkClassName={"nextBttn"}
                     disabledClassName={"paginationDisabled"}
                     activeClassName={"paginationActive"}
-            />
+                />
+
 
             </div>
             {modalOpen && (
-                        <MDBModal 
-                        show={modalOpen} 
-                        tabIndex='-1'>
-                            <MDBModalDialog>
-                                <MDBModalContent>
-                                <MDBModalHeader style={{background:'green'}}>
-                                    <MDBModalTitle style={{color:'white'}}>Thông tin đơn hàng</MDBModalTitle>
-                                    <MDBBtn 
-                                    color='yellow' 
+                <MDBModal
+                    show={modalOpen}
+                    tabIndex='-1'>
+                    <MDBModalDialog>
+                        <MDBModalContent>
+                            <MDBModalHeader style={{background:'green'}}>
+                                <MDBModalTitle style={{color:'white'}}>Thông tin đơn hàng</MDBModalTitle>
+                                <MDBBtn
+                                    color='yellow'
                                     onClick={handleCloseModal}
-                                    ><i className="bi bi-x-square-fill"></i></MDBBtn>
-                                </MDBModalHeader>
-                                <MDBModalBody>{modalBody}</MDBModalBody>
-                                <MDBModalFooter>
-                                    <MDBBtn 
+                                ><i className="bi bi-x-square-fill"></i></MDBBtn>
+                            </MDBModalHeader>
+                            <MDBModalBody>{modalBody}</MDBModalBody>
+                            <MDBModalFooter>
+                                <MDBBtn
                                     style={{background:'red'}}
                                     onClick={handleCloseModal}>
-                                        Đóng
-                                    </MDBBtn>
-                                </MDBModalFooter>
-                                </MDBModalContent>
-                            </MDBModalDialog>
-                        </MDBModal>
-                    )}
+                                    Đóng
+                                </MDBBtn>
+                            </MDBModalFooter>
+                        </MDBModalContent>
+                    </MDBModalDialog>
+                </MDBModal>
+            )}
         </div>
-
     )
 }
-export default UnconfirmInvoice;
+
+export default DeliveredInvoiceScr;

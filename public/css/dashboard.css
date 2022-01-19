@@ -11,6 +11,7 @@ li {
 }
 body{
     background-color: #eee;
+    /*background-image: url("../bg-login.png");*/
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -282,4 +283,9 @@ body{
     color: white;
     background-color: green;
 }
-
+.tongtien{
+    float: left;
+}
+#liner{
+    border: 1px solid green;
+}

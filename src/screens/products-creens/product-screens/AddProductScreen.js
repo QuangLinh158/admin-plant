@@ -81,11 +81,11 @@ const AddProductScreen = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(!MaSp || !TenSp|| !TenLoai || !GiaSp || !ImageURL || !MoTaChiTiet||!SoluongSp || !TinhTrang){
-            setErrorMsg(alert("Vui lòng điền đầy đủ thông tin"));
-        }
-        else
-        {
+        // if(!MaSp || !TenSp|| !TenLoai || !GiaSp || !ImageURL || !MoTaChiTiet||!SoluongSp || !TinhTrang){
+        //     setErrorMsg(alert("Vui lòng điền đầy đủ thông tin"));
+        // }
+        // else
+        // {
             // setState({MaSp:"", TenSp:"", MaLoai:"", GiaSp: 0, ImageURL:url, MoTaChiTiet:"",SoluongSp: 0,TinhTrang: ""});
 
         const uploadTask = storage.storage.ref(`/images/${image.name}`).put(image)
@@ -112,7 +112,7 @@ const AddProductScreen = () => {
 
         }
 
-    };}
+    };
 
     const _onCategoriesChange = (name) => {
         setSelectedCategory(name)
